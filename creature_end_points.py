@@ -21,7 +21,7 @@ class Leg:
     __end_point = None
     __angs = None # [coxa_ang, femur_ang, tibia_ang] в градусах
     __cur_state = None
-    # 5 состояний = 5 положений (5 конечных точек) - возможные состояния (+ начальное состояние)
+    # кол. состояний = кол. положений (кол. конечных точек) - возможные состояния (+ начальное состояние)
     __states = None # [coxa_st1, coxa_st2, ..., start_state]
 
     def __init__(self, id, is_left, coord_syst_transform, coxa_point, end_point, states_set):
@@ -32,7 +32,7 @@ class Leg:
         self.femur_point = [0.0, 0.0, 0.0]
         self.tibia_point = [0.0, 0.0, 0.0]
         self.end_point = [0.0, 0.0, 0.0]
-        self.angs = [0.0, 0.0, 0.0]  # [coxa_ang, femur_ang, tibia_ang] в градусах
+        self.angs = [0.0, 0.0, 0.0]
         self.states = states_set
         self.__cur_state = None
         self.move(end_point)
@@ -103,13 +103,9 @@ class Leg:
     @property
     def cur_state(self):
         return copy.deepcopy(self.__cur_state)
-    @cur_state.setter
-    def cur_state(self, val):
-        # self.__cur_state = copy.deepcopy(val)
-        pass
 
     def num_joints(self):
-        return 3
+        return len(self.angs)
 
     def move(self, new_end_point):
         self.end_point = new_end_point
@@ -210,19 +206,10 @@ class Leg:
 
     def rotate_joint(self, joint_id, ang):
         if (joint_id == 0): # coxa
-            print("r coxa " + str(self.__id))
-            print(ang)
-            print()
             self.rotate_coxa(ang)
         elif (joint_id == 1): # femur
-            print("r femur " + str(self.__id))
-            print(ang)
-            print()
             self.rotate_femur(ang)
         elif (joint_id == 2): # tibia
-            print("r tibia " + str(self.__id))
-            print(ang)
-            print()
             self.rotate_tibia(ang)
         state_id = self.find_state(self.end_point)
         self.__cur_state = state_id
@@ -253,9 +240,6 @@ class Leg:
             self.__tibia_point[1] = ss * math.sin(math.radians(180 - ang))
 
         # femur_point
-        # h = math.fabs(x0 - self.__femur_point[0])
-        # s = math.fabs(y0 - self.__femur_point[1])
-        # ss = math.sqrt(h * h + s * s)
         ss = self.L0
         if (ang <= 90):
             self.__femur_point[0] = ss * math.cos(math.radians(ang))
@@ -270,14 +254,13 @@ class Leg:
         x0, y0, z0 = self.femur_point
 
         # Рассчитываем угол v по старому положению ноги
+        # v - угол между femur и отрезком Coxa-EndPoint
         k = math.fabs(x0 - self.__end_point[0])
         s = math.fabs(y0 - self.__end_point[1])
         h = math.fabs(z0 - self.__end_point[2])
         ss = math.sqrt(k * k + s * s + h * h)
         u = (ss * ss + self.L1 * self.L1 - self.L2 * self.L2) / 2 / ss / self.L1
         v = math.acos(u) * 180 / math.pi
-
-        # Обновляем h (разницу между точками по z) для нового положения конечной точки
 
         #end_point
         if((ang + v) <= 90):
@@ -342,9 +325,8 @@ class Leg:
                     math.fabs(self.__states[i][2] - end_point[2]) < self.calc_eps):
                 return i
 
-        print("find_state end_point={0} Неизвестное состояние!".format(end_point))
+        print("Warning! find_state end_point={0} Неизвестное состояние!".format(end_point))
         return None
-
 
     def transform_point_to_global(self, point, cur_pos = (0.0, 0.0, 0.0)):
         cur_dx, cur_dy, cur_dz = cur_pos
@@ -378,20 +360,6 @@ class Leg:
             for j in range(len(tr_coords[0])):
                 plot_coord[j].append(tr_coords[i][j])
 
-        # tmp1 = math.sqrt((plot_coord[0][0]-plot_coord[0][1])*(plot_coord[0][0]-plot_coord[0][1]) +
-        #                  (plot_coord[1][0]-plot_coord[1][1])*(plot_coord[1][0]-plot_coord[1][1]) +
-        #                  (plot_coord[2][0]-plot_coord[2][1])*(plot_coord[2][0]-plot_coord[2][1]))
-        # tmp2 = math.sqrt((plot_coord[0][1]-plot_coord[0][2])*(plot_coord[0][1]-plot_coord[0][2]) +
-        #                  (plot_coord[1][1]-plot_coord[1][2])*(plot_coord[1][1]-plot_coord[1][2]) +
-        #                  (plot_coord[2][1]-plot_coord[2][2])*(plot_coord[2][1]-plot_coord[2][2]))
-        # tmp3 = math.sqrt((plot_coord[0][2]-plot_coord[0][3])*(plot_coord[0][2]-plot_coord[0][3]) +
-        #                  (plot_coord[1][2]-plot_coord[1][3])*(plot_coord[1][2]-plot_coord[1][3]) +
-        #                  (plot_coord[2][2]-plot_coord[2][3])*(plot_coord[2][2]-plot_coord[2][3]))
-        # print(tmp1)
-        # print(tmp2)
-        # print(tmp3)
-        # print("")
-
         return plot_coord
 
     def coord_system_for_plot(self, cur_pos=(0.0, 0.0, 0.0)):
@@ -419,7 +387,6 @@ class Leg:
 # *_2.5|     |2.5_*      |      |  15 см
 #      |     |           | 7.5  |
 #      *     *
-
 
 class Creature:
     leg_count = 6
@@ -463,6 +430,17 @@ class Creature:
                self.cur_body_center[2] - self.start_body_center[2])
         return res
 
+    def get_center_of_body(self):
+        res = 1e6
+        for i in range(self.legs):
+            end_point = self.legs[i].end_point
+            if (end_point[2] < res):
+                res = end_point[2]
+        return [self.cur_body_center[0],
+                self.cur_body_center[1],
+                self.cur_body_center[2] - math.fabs(-self.robot_height - res)]
+
+
     def head_z(self):
         return self.robot_height
 
@@ -484,8 +462,6 @@ class Creature:
                 action_num -= cur_st_count
                 leg_id += 1
 
-        # leg_id = int(action_num // 4)
-        # state_num = int(action_num % 4)
         return leg_id, state_num
 
     def move(self, leg_id, new_end_point):
@@ -496,7 +472,7 @@ class Creature:
 
     def do_action(self, action_num):
         leg_id, state_num = self.get_action(action_num)
-        print("action_num = {}, leg_id = {}, state_num = {}".format(action_num, leg_id, state_num))
+        print("Info! do_action action_num = {}, leg_id = {}, state_num = {}".format(action_num, leg_id, state_num))
         new_end_point = self.legs[leg_id].states[state_num]
         self.legs[leg_id].move(new_end_point)
 
@@ -516,8 +492,6 @@ class Creature:
 
         new_end_p = self.legs[leg_id].transform_point_to_global(self.legs[leg_id].end_point, self.cur_delta_distance_xyz)
         ground_point = self.legs[leg_id].transform_point_to_global([0, 0, -self.robot_height], self.cur_delta_distance_xyz)
-        print(prev_end_p)
-        print(new_end_p)
         if (math.fabs(ground_point[2] - prev_end_p[2]) < self.ground_eps) and (math.fabs(ground_point[2] - new_end_p[2]) < self.ground_eps): # оттолкнулся
             delta_xyz = (prev_end_p[0] - new_end_p[0],
                          prev_end_p[1] - new_end_p[1],
@@ -525,87 +499,4 @@ class Creature:
             self.cur_body_center = T(self.cur_body_center, delta_xyz[0], delta_xyz[1], delta_xyz[2])
             self.cur_delta_distance_xyz = self.get_cur_delta_distance_xyz()
 
-    def print_creature_joints(self, fout):
-        # fout.write("--------------------------Creature Joints----------------------------\n")
-        # for j in self.__joints:
-        #     fout.write("{0:.8f} {1:.8f} {2:.8f}\n".format(j.x, j.y, j.z))
-        # fout.write("--------------------------Creature States----------------------------\n")
-        # for s in self.__states_mvlines:
-        #     fout.write("{0} ".format(s[0]))
-        # fout.write("\n---------------------------------------------------------------------")
-        pass
-
-steps = [
-    (5, [2.83, 12.83, 3-1.0*Creature.robot_height]),
-    (1, [4, 10, 3-1.0*Creature.robot_height]),
-    (3, [0, 10, 3-1.0*Creature.robot_height]),
-
-    (5, [2.83, 12.83, -1.0*Creature.robot_height]),
-    (1, [4, 10, -1.0*Creature.robot_height]),
-    (3, [0, 10, -1.0*Creature.robot_height]),
-
-    (4, [0, 10, 3-1.0*Creature.robot_height]),
-    (2, [0, 10, 3-1.0*Creature.robot_height]),
-    (0, [0, 10, 3-1.0*Creature.robot_height]),
-
-    (5, [0, 10, -1.0*Creature.robot_height]),
-    (3, [-2.83, 12.83, -1.0*Creature.robot_height]),
-    (1, [0, 10, -1.0*Creature.robot_height]),
-
-    (4, [0, 10, -1.0*Creature.robot_height]),
-    (2, [0, 10, -1.0*Creature.robot_height]),
-    (0, [0, 10, -1.0*Creature.robot_height]),
-
-    (0, [2.83, 12.83, 3-1.0*Creature.robot_height]),
-    (4, [4, 10, 3-1.0*Creature.robot_height]),
-    (2, [0, 10, 3-1.0*Creature.robot_height]),
-
-    (0, [2.83, 12.83, -1.0*Creature.robot_height]),
-    (4, [4, 10, -1.0*Creature.robot_height]),
-    (2, [0, 10, -1.0*Creature.robot_height]),
-
-    (1, [0, 10, 3-1.0*Creature.robot_height]),
-    (3, [0, 10, 3-1.0*Creature.robot_height]),
-    (5, [0, 10, 3-1.0*Creature.robot_height]),
-
-    (0, [0, 10, -1.0*Creature.robot_height]),
-    (2, [-2.83, 12.83, -1.0*Creature.robot_height]),
-    (4, [0, 10, -1.0*Creature.robot_height]),
-
-    (1, [0, 10, -1.0*Creature.robot_height]),
-    (3, [0, 10, -1.0*Creature.robot_height]),
-    (5, [0, 10, -1.0*Creature.robot_height])
-]
-pause = [
-    0.001,
-    0.001,
-    0.050,
-    0.001,
-    0.001,
-    0.100,
-    0.001,
-    0.001,
-    0.050,
-    0.001,
-    0.001,
-    0.100,
-    0.001,
-    0.001,
-    0.100,
-    0.001,
-    0.001,
-    0.050,
-    0.001,
-    0.001,
-    0.100,
-    0.001,
-    0.001,
-    0.050,
-    0.001,
-    0.001,
-    0.100,
-    0.001,
-    0.001,
-    0.100
-]
 

@@ -1,9 +1,9 @@
 import copy
 import math
 import random
-import sys
 import time
 import datetime
+import os
 
 from creature_end_points import Creature
 from common import Test
@@ -24,55 +24,47 @@ fout_res = open("tmp_res.txt", "w")
 # logout("log.txt")
 # testout("test.txt")
 
-# res_dir_str = "Res\\"
-# wb_finame_end = "_weights_and_biases.txt"
-# curcr_finame_end = "_cur_creature.txt"
-# dist_finame_end = "_dist.txt"
-# run_dist_finame_end = "_run_dist.txt"
+# init_tests_filename = "point_init_tests.txt"
+init_tests_filename = "tests.txt"
 
-# nnets_dir_str = "NNets\\"
-# creatures_dir_str = "Creatures\\"
-# nnet_finame_end = "_nnet.txt"
-# creature_finame_end = "_creature.txt"
+res_dir_str = "Res"
+run_dist_finame_start = "res_dist_" # + текущее время
+run_dist_finame_end = ".txt"
+
+nnets_dir_str = "models"
+nnet_finame_start = "point_model_" # + текущее время
+nnet_finame_end = ".h5"
 
 # NNet Config------------------------------------------------------
+nnet_id = -1
 nnet_name = ""
-creature_name = ""
+creature_name = "Hexapod"
 NUM_HIDDEN_LAYERS = 2
 NUM_HIDDEN_NEURONS = 100
-# ACT_FUNC = TANH
+ACT_FUNC = 'tanh'
+END_ACT_FUNC = 'linear'
 TOTAL_TESTS_NUMBER = 1000
 CUR_TESTS_NUMBER = 100
 EPOCH = 10
-# TRAINING_TYPE = RMS
-
-# For RMS
-RMS_GAMMA = 0.95
-RMS_LEARN_RATE = 0.001
-RMS_EPS = 1e-8
+TRAINING_TYPE = 'rmsprop'
 
 QGAMMA = 0.9 # Коэффициент доверия
 TICK_COUNT = 10000
 TRAIN_EPS = 0.001
 
-LearningRate = 0.01 # Для алгоритма обратного распространения
-
 ALL_DIST = 0
 PREV_STEP_DIST = 1
-CENTER_OF_GRAVITY_Z = 2
-FALLING = 3
-HEAD_Y = 4
+CENTER_OF_BODY_Z = 2
+REPEAT_ACTION = 3
 used_reward = []
-k_reward = {"CENTER_OF_GRAVITY_Z":0, "FALLING":0, "HEAD_Y":0}
+k_reward = {"CENTER_OF_BODY_Z": 0, "REPEAT_ACTION":0}
 
-recovery_from_falling = False
+T = 500 #Период сохранения модели
+RUN_TYPE = "RUN" #"TRAIN" # "RUN"
 
-T = 100 #Период печати весов
-
-# Для модели------------------------------------------------
-# start_joints = list(map(Point, []))
-# start_states = []
-
+# For Model------------------------------------------------------------
+creature_id = -1
+creature_name = "Hexapod"
 reward = 0.0
 prev_dist = 0.0
 cur_tick = 0
@@ -80,6 +72,7 @@ cur_tick = 0
 Q = []
 prevQ = []
 prev_action = -1
+same_action_count = 0
 first_step = True
 
 inputs = []
@@ -87,6 +80,7 @@ prev_inputs = []
 
 monster = None
 
+# Tests---------------------------------------------------------------
 tests = list(map(Test, []))
 init_tests_count = 0
 
@@ -96,10 +90,6 @@ def CreatureInitialization():
     # Constant----------------------------------------------------------------------------------------------------
     LEG_COUNT = 6
     robot_height = 12  # z
-    # [x, y, z] - начальная и конечная точки
-    # coord_system = [("g", [0, 0, 0], [3, 0, 0]),  # Ox
-    #                 ("b", [0, 0, 0], [0, 3, 0]),  # Oy
-    #                 ("r", [0, 0, 0], [0, 0, 3])]  # Oz
     legs_is_left = [True, True, True, False, False, False]
     coord_systems_transform = {"Rz": [-45, 0, 45, 135, 180, -135],
                               "dx": [25, 17.5, 10, 10, 17.5, 25],
@@ -217,54 +207,26 @@ def CreatureInitializationFromFile(filename):
     #     monster.fall_unit_angle = fall_unit_angle
     #     monster.turn_unit_angle = turn_unit_angle
 
-# ?
-def SetJointsAndStates(filename):
-    pass
-    # global monster
-    # with open(filename, "r") as fin:
-    #     cur_joints = []
-    #     s = fin.readline()
-    #     joint_count = monster.num_joints
-    #     for i in range(joint_count):
-    #         x, y, z = map(float, fin.readline().strip().split())
-    #         cur_joints.append(Point(x, y, z))
-    #
-    #     s = fin.readline()
-    #     cur_states = list(map(int, fin.readline().strip().split()))
-    #
-    #     monster.joints = cur_joints
-    #     monster.states = cur_states
-# ?
-def SetCurDist(dist):
-    pass
-    # global monster
-    # joints = monster.joints
-    # for i in range(len(joints)):
-    #     joints[i].x += dist
-    # monster.joints = joints
-
 def NNet():
-    global monster, nnet
-    # model.add(Dense(number_of_neurons, input_dim=number_of_cols_in_input, activtion=some_activation_function)).
+    global monster, nnet, used_reward
 
     nnet = Sequential()
-    nnet.add(Dense(NUM_HIDDEN_NEURONS, input_dim=3*4*monster.leg_count, activation='tanh'))
-    nnet.add(Dense(NUM_HIDDEN_NEURONS, activation='tanh'))
-    nnet.add(Dense(monster.get_num_actions(), activation='linear'))
+    nnet.add(Dense(NUM_HIDDEN_NEURONS, input_dim=3*4*monster.leg_count, activation=ACT_FUNC)) #'tanh'
+    nnet.add(Dense(NUM_HIDDEN_NEURONS, activation=ACT_FUNC)) # 'tanh'
+    nnet.add(Dense(monster.get_num_actions(), activation=END_ACT_FUNC)) # 'linear'
 
     # nnet.summary()
-
     # nnet.compile(optimizer='rmsprop', loss="mean_squared_error", metrics=["mean_squared_error"])
 
-    nnet.compile(optimizer='rmsprop', loss="mean_squared_error")
+    nnet.compile(optimizer=TRAINING_TYPE, loss="mean_squared_error") # 'rmsprop'
 
-    # X = np.asarray([tests[0].inputs], type=np.float32)
-    # Y = np.asarray([tests[0].outputs], type=np.float32)
-    # X = np.asarray([[5]*(3 * monster.num_joints)], dtype=np.float32)
-    # Y = np.asarray([[1]*monster.get_num_actions()], dtype=np.float32)
-    # nnet.fit(X, Y, epochs=EPOCH, batch_size=min(1, CUR_TESTS_NUMBER), verbose=2)
-    # predictions = nnet.predict(X)
-    # print(predictions)
+    used_reward = [ALL_DIST]
+
+def SaveNNet():
+    global nnet, nnets_dir_str, nnet_finame_start, nnet_finame_end
+
+    cur_time = datetime.datetime.now().strftime('%Y%m%d-%H-%M-%S')
+    nnet.save(filepath=os.path.abspath(os.path.join(nnets_dir_str, nnet_finame_start, cur_time, nnet_finame_end)))
 
 def SetInputs():
     global monster
@@ -295,7 +257,7 @@ def AddTest(inp, outp):
 
 def InitTests():
     global init_tests_count, monster, tests
-    with open("tests.txt", "r") as fin:
+    with open(init_tests_filename, "r") as fin:
         data = fin.readlines()
 
         actions_count = monster.get_num_actions()
@@ -308,7 +270,7 @@ def InitTests():
 
             state_id = monster.legs[leg_id].find_state(end_point)
             if (state_id == None):
-                print("Error!!!!")
+                print("Error! Не найдено состояние для теста")
 
             for j in range(leg_id):
                 state_id += len(monster.legs[j].states) - 1
@@ -320,39 +282,25 @@ def InitTests():
 
         init_tests_count = len(tests)
 
-
 def GetReward():
-    global k_reward
-    global used_reward
-    global monster
-    global prev_dist
-    # res = 0
-    # for i in range(len(used_reward)):
-        # rew = {
-        #     ALL_DIST: math.fabs(monster.cur_delta_distance()),
-        #     PREV_STEP_DIST: math.fabs(prev_dist - monster.cur_delta_distance()),
-        #     CENTER_OF_GRAVITY_Z: -k_reward["CENTER_OF_GRAVITY_Z"] / max(1.0, monster.center_of_gravity_y()),
-        #     FALLING: -k_reward["FALLING"] / max(1.0, monster.falling),
-        #     HEAD_Y: -k_reward["HEAD_Y"] / max(1.0, monster.head_y)
-        # }[i]
-        # res += rew
+    global k_reward, used_reward, monster, prev_dist
 
-    # res = math.fabs(monster.get_cur_delta_distance())
-    res = math.fabs(prev_dist - monster.get_cur_delta_distance())
-    # res = (prev_dist - monster.get_cur_delta_distance())
+    res = 0
+    for i in range(len(used_reward)):
+        rew = {
+            ALL_DIST: math.fabs(monster.get_cur_delta_distance()),
+            PREV_STEP_DIST: math.fabs(prev_dist - monster.get_cur_delta_distance()),
+            CENTER_OF_BODY_Z: -k_reward["CENTER_OF_BODY_Z"] / max(1.0, monster.get_center_of_body()[2]),
+            REPEAT_ACTION: -k_reward["REPEAT_ACTION"] / max(1.0, same_action_count)
+        }[i]
+        res += rew
+
     return res
 
 def DoNextStep():
-    global recovery_from_falling, monster, prev_dist, \
+    global nnet, recovery_from_falling, monster, prev_dist, \
         prev_inputs, inputs, reward, cur_tick, first_step, \
-        Q, prevQ, prev_action, tests, res_dir_str, nnet_name, \
-        dirname, wb_finame_end, curcr_finame_end, res_dir_str
-
-    # if (recovery_from_falling and (not first_step)):
-    #     if (monster.head_y <= monster.center_of_gravity_y()):
-    #         monster.joints = start_joints
-    #         monster.states = start_states
-    #         SetCurDist(prev_dist)
+        Q, prevQ, prev_action, tests, same_action_count
 
 
     prev_inputs = copy.deepcopy(inputs)
@@ -363,9 +311,7 @@ def DoNextStep():
     prev_dist = monster.get_cur_delta_distance()
     cur_tick += 1
 
-    fout_res.write("{}     {}\n".format(cur_tick-1, prev_dist))
-    print(cur_tick)
-
+    print("\nCur tick: {0}".format(cur_tick))
     print("All dist: {0}".format(prev_dist))
 
     if (not first_step):
@@ -373,71 +319,60 @@ def DoNextStep():
 
         tmpQ = -DBL_MAX
         for i in range(len(Q)):
-            if (tmpQ < Q[i]):  # and monster.can_do_action(i)):
+            if (tmpQ < Q[i]):
                 tmpQ = Q[i]
                 action = i
 
         Q[prev_action] = reward + QGAMMA*tmpQ
 
-        AddTest(prev_inputs, Q)
-        # epoch = EPOCH
+        if (RUN_TYPE == "TRAIN"):
+            AddTest(prev_inputs, Q)
+            epoch = EPOCH
+            tests_pos = [i for i in range(init_tests_count)]
+            for i in range(init_tests_count, min(CUR_TESTS_NUMBER, len(tests))):
+                pos = max(0, random.randint(init_tests_count, len(tests) - 1))
+                tests_pos.append(pos)
 
-        # tests_pos = []
-        # for i in range(min(CUR_TESTS_NUMBER, len(tests))):
-        #     pos = max(0, random.randint(0, tests.size() - 1))
-        #     tests_pos.append(pos)
+            cur_tests_in = np.asarray([copy.deepcopy(tests[tests_pos[i]].inputs) for i in range(len(tests_pos))], dtype=np.float32)
+            cur_tests_out = np.asarray([copy.deepcopy(tests[tests_pos[i]].outputs) for i in range(len(tests_pos))], dtype=np.float32)
+            nnet.fit(cur_tests_in, cur_tests_out, epochs=epoch, batch_size=min(1, CUR_TESTS_NUMBER), verbose=0)
 
-        # cur_tests_in = np.asarray([copy.deepcopy(tests[i].inputs) for i in range(len(tests))], dtype=np.float32)
-        # cur_tests_out = np.asarray([copy.deepcopy(tests[i].outputs) for i in range(len(tests))], dtype=np.float32)
-        # nnet.fit(cur_tests_in, cur_tests_out, epochs=EPOCH, batch_size=min(1, CUR_TESTS_NUMBER), verbose=0)
-
-        # for i in range(epoch):
-            # if (nnet.RMSLearningOffline(tests, tests_pos) < TRAIN_EPS) // Добавить расчет ошибки
-            # break;
-            # pass
     else:
-        # nnet.Running(inputs);
-        # Q = nnet.GetOutput();
         [Q] = nnet.predict(np.asarray([SetInputs()], dtype=np.float32))
 
         tmpQ = -DBL_MAX
         for i in range(len(Q)):
-            if (tmpQ < Q[i]): # and monster.can_do_action(i)):
+            if (tmpQ < Q[i]):
                 tmpQ = Q[i]
                 action = i
         first_step = False
 
-    if (action != prev_action): # ?
+    if (action != prev_action):
         monster.update_pos(action_num=action)
+        same_action_count = 0
+    else:
+        same_action_count += 1
 
     if random.random() < 0.1:
         counter = 100
         flag_do = False
         for i in range(counter):
             action = random.randint(0, monster.get_num_actions() - 1)
-            # if monster.can_do_action(action):
             flag_do = True
             break
         if flag_do:
-            if (action != prev_action): # ?
+            if (action != prev_action):
                 monster.update_pos(action_num=action)
+                same_action_count = 0
+            else:
+                same_action_count += 1
 
     prev_action = action
     prevQ = copy.deepcopy(Q)
 
     #Сохранение модели
     # if (cur_tick % T == 0):
-    #     nnet.save(filepath="C:/Users/Елена/Desktop/Диплом_Маг/3D_model/models/model_" + datetime.datetime.now().strftime('%Y%m%d-%H-%M-%S') + '.h5')
-
-    # Вывод текущей информации
-    # if (cur_tick % T == 0):
-    #     dirname = res_dir_str + nnet_name
-    #     with open(dirname + "\\" + nnet_name + wb_finame_end, "a") as wbfout:
-    #         nnet.PrintWeightsAndBiases(wbfout, false);
-            # pass
-        #
-        # with open(dirname + "\\" + nnet_name + curcr_finame_end, "a") as crfout:
-        #     monster.print_creature_joints(crfout)
+    #     SaveNNet()
 
 def Timer(tick, coord_syst_lines, leg_lines, point_annotation):
     DoNextStep()
@@ -476,7 +411,7 @@ def InitDraw(ax):
         point_annotation.append(ax.text3D(end_p[0] + dx, end_p[1] + dy, end_p[2], i, None))
 
     # Setting the axes properties
-    ax.set_xlim3d([-10.0, 100.0])
+    ax.set_xlim3d([-20.0, 50.0])
     ax.set_xlabel('X')
 
     ax.set_ylim3d([-10.0, 50.0])
@@ -485,8 +420,8 @@ def InitDraw(ax):
     ax.set_zlim3d([0.0, 30.0])
     ax.set_zlabel('Z')
 
-def Draw(tick, coord_syst_lines, leg_lines, point_annotation):
-    global monster #, legs , coord_system, steps, pause
+def Draw(_tick, coord_syst_lines, leg_lines, point_annotation):
+    global monster
 
     for i in range(len(monster.legs)):
         cur_coord_syst = monster.legs[i].coord_system_for_plot(monster.cur_delta_distance_xyz)
@@ -510,26 +445,32 @@ def Draw(tick, coord_syst_lines, leg_lines, point_annotation):
         point_annotation[i].set_position([end_p[0] + dx, end_p[1] + dy])
         point_annotation[i].set_3d_properties(end_p[2])
 
-    # time.sleep(pause[tick] / 10000000)
+
+    # Setting the axes properties
+    cur_delta_distance_xyz = monster.cur_delta_distance_xyz
+    ax.set_xlim3d([-20.0 + cur_delta_distance_xyz[0], 50.0 + cur_delta_distance_xyz[0]])
+    ax.set_xlabel('X')
+
+    ax.set_ylim3d([-10.0 + cur_delta_distance_xyz[1], 50.0 + cur_delta_distance_xyz[1]])
+    ax.set_ylabel('Y')
+
+    ax.set_zlim3d([0.0 + cur_delta_distance_xyz[2], 30.0 + cur_delta_distance_xyz[2]])
+    ax.set_zlabel('Z')
 
     return coord_syst_lines, leg_lines, point_annotation
 
 if __name__ == "__main__":
-    # Инициализация существа
-    creature_name = "square"
     # crfilename = creatures_dir_str + creature_name + creature_finame_end
     # CreatureInitializationFromFile(crfilename)
     CreatureInitialization()
 
-    nnet_name = "square"
-    # nnfilename = nnets_dir_str + nnet_name + nnet_finame_end
     # NNet()
     nnet = load_model('models/model_20200530-23-08-36.h5')
 
-    # Создание папки Res
-
-    # Создание папки для результтов существа
-    # dirname = res_dir_str + nnet_name;
+    # Создание папок
+    directory = os.path.join(nnets_dir_str)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
     # Attaching 3D axis to the figure
     fig = plt.figure()
@@ -538,8 +479,6 @@ if __name__ == "__main__":
     InitTests()
 
     InitDraw(ax)
-    # monster.legs[4].rotate_joint(1, 68)
-    # monster.legs[4].rotate_joint(0, 68.19859051364821)
 
     line_animation = animation.FuncAnimation(fig, Timer, frames=TICK_COUNT,
                                              fargs=(coord_syst_lines, leg_lines, point_annotation),

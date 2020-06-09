@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="25a9fe41-be0a-41b7-af63-2c7d11d67f5f" name="Default Changelist" comment="" />
+    <list default="true" id="25a9fe41-be0a-41b7-af63-2c7d11d67f5f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/creature_end_points.py" beforeDir="false" afterPath="$PROJECT_DIR$/creature_end_points.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_end_points.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_end_points.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp_res.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tmp_res.txt" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,35 +17,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main_end_points.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1700">
-              <caret line="117" selection-start-line="117" selection-end-line="118" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#9959#10743#0" />
-                <element signature="e#14212#14286#0" />
-                <element signature="e#15861#17064#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/creature_end_points.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1700">
-              <caret line="103" column="23" selection-start-line="103" selection-start-column="8" selection-end-line="103" selection-end-column="23" />
+            <state relative-caret-position="143">
+              <caret line="493" column="123" selection-start-line="493" selection-start-column="123" selection-end-line="493" selection-end-column="123" />
               <folding>
-                <element signature="e#3149#3157#0" />
+                <element signature="e#2998#3010#0" />
                 <element signature="e#3202#7329#0" />
                 <element signature="e#7382#7944#0" />
                 <element signature="e#7986#9521#0" />
                 <element signature="e#9564#11637#0" />
+                <element signature="e#11680#12796#0" />
+                <element signature="e#12843#13259#0" />
+                <element signature="e#13345#13774#0" />
+                <element signature="e#13847#14178#0" />
+                <element signature="e#14245#15496#0" />
+                <element signature="e#15568#15994#0" />
+                <element signature="e#16030#16231#0" />
                 <element signature="e#16782#17630#0" />
                 <element signature="e#17671#17915#0" />
                 <element signature="e#17963#18031#0" />
                 <element signature="e#18083#18297#0" />
+                <element signature="e#16776#16957#0" />
                 <element signature="e#18329#18353#0" />
                 <element signature="e#18394#18542#0" />
                 <element signature="e#18590#19066#0" />
@@ -51,57 +50,33 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#6862#9324#0" />
-                <element signature="e#9368#9871#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/prog_for_arduino.py">
+        <entry file="file://$PROJECT_DIR$/main_end_points.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="322" column="42" selection-start-line="322" selection-start-column="42" selection-end-line="322" selection-end-column="42" />
+            <state relative-caret-position="304">
+              <caret line="313" column="13" selection-start-line="313" selection-start-column="13" selection-end-line="313" selection-end-column="13" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#1824#4014#0" />
+                <element signature="e#4066#6528#0" />
+                <element signature="e#6291#6829#0" />
+                <element signature="e#6780#7019#0" />
+                <element signature="e#8266#8884#0" />
+                <element signature="e#8914#9055#0" />
+                <element signature="e#9078#9935#0" />
+                <element signature="e#9959#10743#0" />
+                <element signature="e#14212#14286#0" />
+                <element signature="e#14382#15792#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/3d_model_v2.py">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/os.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5219">
-              <caret line="356" column="42" selection-start-line="356" selection-start-column="42" selection-end-line="356" selection-end-column="42" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#252#593#0" />
-                <element signature="e#617#954#0" />
-                <element signature="e#978#1315#0" />
-                <element signature="e#1354#1580#0" />
-                <element signature="e#1611#1836#0" />
-              </folding>
+            <state relative-caret-position="140">
+              <caret line="219" selection-start-line="219" selection-end-line="219" />
             </state>
           </provider>
         </entry>
@@ -117,11 +92,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>inputs</find>
-      <find>DBL_MAX</find>
-      <find>creature</find>
-      <find>get_num_actions</find>
-      <find>update_pos</find>
       <find>Creature.</find>
       <find>prev_action</find>
       <find>prev_inputs</find>
@@ -135,7 +105,6 @@
       <find>,</find>
       <find>87.22937300022821</find>
       <find>94.</find>
-      <find>print</find>
       <find>get_</find>
       <find>find_state</find>
       <find>get_act</find>
@@ -147,6 +116,12 @@
       <find>print(</find>
       <find>fout_tests</find>
       <find>SendAngsToArduino</find>
+      <find>h</find>
+      <find>LearningRate</find>
+      <find>cur_body_center</find>
+      <find>nnets_dir_str</find>
+      <find>directory</find>
+      <find>print</find>
     </findStrings>
     <replaceStrings>
       <replace>])</replace>
@@ -162,6 +137,9 @@
       <replace>monster</replace>
     </replaceStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -171,7 +149,6 @@
         <option value="$PROJECT_DIR$/NeuroNet.py" />
         <option value="$PROJECT_DIR$/3d_model_v1.py" />
         <option value="$PROJECT_DIR$/sqlite_controller.py" />
-        <option value="$PROJECT_DIR$/common.py" />
         <option value="$PROJECT_DIR$/3d_model_v2(test_rotate).py" />
         <option value="$PROJECT_DIR$/tmp.py" />
         <option value="$PROJECT_DIR$/dataset.txt" />
@@ -181,17 +158,18 @@
         <option value="$PROJECT_DIR$/3d_model_v2.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/creature.py" />
+        <option value="$PROJECT_DIR$/prog_for_arduino.py" />
+        <option value="$PROJECT_DIR$/common.py" />
         <option value="$PROJECT_DIR$/creature_end_points.py" />
         <option value="$PROJECT_DIR$/main_end_points.py" />
-        <option value="$PROJECT_DIR$/prog_for_arduino.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-5" />
-    <option name="y" value="11" />
-    <option name="width" value="1424" />
-    <option name="height" value="1040" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="978" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -364,14 +342,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19629875" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19629875" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.398017" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.36402267" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.57932013" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -667,43 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_end_points.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1700">
-          <caret line="117" selection-start-line="117" selection-end-line="118" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#9959#10743#0" />
-            <element signature="e#14212#14286#0" />
-            <element signature="e#15861#17064#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/creature_end_points.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1700">
-          <caret line="103" column="23" selection-start-line="103" selection-start-column="8" selection-end-line="103" selection-end-column="23" />
-          <folding>
-            <element signature="e#3149#3157#0" />
-            <element signature="e#3202#7329#0" />
-            <element signature="e#7382#7944#0" />
-            <element signature="e#7986#9521#0" />
-            <element signature="e#9564#11637#0" />
-            <element signature="e#16782#17630#0" />
-            <element signature="e#17671#17915#0" />
-            <element signature="e#17963#18031#0" />
-            <element signature="e#18083#18297#0" />
-            <element signature="e#18329#18353#0" />
-            <element signature="e#18394#18542#0" />
-            <element signature="e#18590#19066#0" />
-            <element signature="e#19119#19156#0" />
-            <element signature="e#19217#19262#0" />
-            <element signature="e#19309#19562#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -716,19 +658,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/3d_model_v2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5219">
+        <state relative-caret-position="621">
           <caret line="356" column="42" selection-start-line="356" selection-start-column="42" selection-end-line="356" selection-end-column="42" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -743,10 +675,80 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/prog_for_arduino.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="322" column="42" selection-start-line="322" selection-start-column="42" selection-end-line="322" selection-end-column="42" />
+        <state relative-caret-position="238">
+          <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="83" column="44" lean-forward="true" selection-start-line="83" selection-start-column="44" selection-end-line="83" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#1840#1937#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/os.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="219" selection-start-line="219" selection-end-line="219" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/creature_end_points.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="493" column="123" selection-start-line="493" selection-start-column="123" selection-end-line="493" selection-end-column="123" />
+          <folding>
+            <element signature="e#2998#3010#0" />
+            <element signature="e#3202#7329#0" />
+            <element signature="e#7382#7944#0" />
+            <element signature="e#7986#9521#0" />
+            <element signature="e#9564#11637#0" />
+            <element signature="e#11680#12796#0" />
+            <element signature="e#12843#13259#0" />
+            <element signature="e#13345#13774#0" />
+            <element signature="e#13847#14178#0" />
+            <element signature="e#14245#15496#0" />
+            <element signature="e#15568#15994#0" />
+            <element signature="e#16030#16231#0" />
+            <element signature="e#16782#17630#0" />
+            <element signature="e#17671#17915#0" />
+            <element signature="e#17963#18031#0" />
+            <element signature="e#18083#18297#0" />
+            <element signature="e#16776#16957#0" />
+            <element signature="e#18329#18353#0" />
+            <element signature="e#18394#18542#0" />
+            <element signature="e#18590#19066#0" />
+            <element signature="e#19119#19156#0" />
+            <element signature="e#19217#19262#0" />
+            <element signature="e#19309#19562#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_end_points.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="313" column="13" selection-start-line="313" selection-start-column="13" selection-end-line="313" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#1824#4014#0" />
+            <element signature="e#4066#6528#0" />
+            <element signature="e#6291#6829#0" />
+            <element signature="e#6780#7019#0" />
+            <element signature="e#8266#8884#0" />
+            <element signature="e#8914#9055#0" />
+            <element signature="e#9078#9935#0" />
+            <element signature="e#9959#10743#0" />
+            <element signature="e#14212#14286#0" />
+            <element signature="e#14382#15792#0" />
           </folding>
         </state>
       </provider>
