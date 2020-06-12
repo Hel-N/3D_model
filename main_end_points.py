@@ -31,14 +31,17 @@ res_dir_str = "Res"
 run_dist_finame_start = "res_dist_" # + текущее время
 run_dist_finame_end = ".txt"
 
-nnets_dir_str = "models"
-nnet_finame_start = "point_model_" # + текущее время
+creature_dir_str = "Creatures"
+creature_finame_end = ".txt"
+
+nnets_dir_str = "models_points"
+# nnet_finame_start = "point_model_" # + текущее время
 nnet_finame_end = ".h5"
 
 # NNet Config------------------------------------------------------
 nnet_id = -1
 nnet_name = ""
-creature_name = "Hexapod"
+creature_name = ""
 NUM_HIDDEN_LAYERS = 2
 NUM_HIDDEN_NEURONS = 100
 ACT_FUNC = 'tanh'
@@ -59,8 +62,8 @@ REPEAT_ACTION = 3
 used_reward = []
 k_reward = {"CENTER_OF_BODY_Z": 0, "REPEAT_ACTION":0}
 
-T = 500 #Период сохранения модели
-RUN_TYPE = "RUN" #"TRAIN" # "RUN"
+T = 100 #Период сохранения модели
+RUN_TYPE = "TRAIN" # "RUN"
 
 # For Model------------------------------------------------------------
 creature_id = -1
@@ -141,71 +144,89 @@ def CreatureInitialization():
     monster = Creature(LEG_COUNT, robot_height, legs_is_left, coord_systems_transform, start_foot_points, leg_states_set)
 
 def CreatureInitializationFromFile(filename):
-    pass
-    # global monster
-    # global start_joints
-    # with open(filename, "r") as fin:
-    #     joints = []
-    #     s = fin.readline()
-    #     joint_count = int(fin.readline().strip())
-    #     for i in range(joint_count):
-    #         x, y, z = map(float, fin.readline().strip().split())
-    #         joints.append(Point(x, y, z))
-    #     start_joints = copy.deepcopy(joints)
-    #
-    #     lines = []
-    #     s = fin.readline()
-    #     line_count = int(fin.readline().strip())
-    #     for i in range(line_count):
-    #         idp1, idp2 = map(int, fin.readline().strip().split())
-    #         lines.append(Pair(idp1, idp2))
-    #
-    #     mvlines = []
-    #     s = fin.readline()
-    #     mvlines_count = int(fin.readline().strip())
-    #     for i in range(mvlines_count):
-    #         line_id, joint_id = map(int, fin.readline().strip().split())
-    #         mvlines.append(Pair(line_id, joint_id))
-    #
-    #
-    #     s = fin.readline()
-    #     fall_unit_angle = float(fin.readline().strip())
-    #     s = fin.readline()
-    #     turn_unit_angle = float(fin.readline().strip())
-    #
-    #     turnints = []
-    #     s = fin.readline()
-    #     turnint_count = int(fin.readline().strip())
-    #     for i in range(turnint_count):
-    #         min_ang, max_ang = map(float, fin.readline().strip().split())
-    #         turnints.append(Pair(min_ang, max_ang))
-    #
-    #     mvstates = []
-    #     s = fin.readline()
-    #     mvstate_count = int(fin.readline().strip())
-    #     for i in range(mvstate_count):
-    #         st_num, st_count = map(int, fin.readline().strip().split())
-    #         mvstates.append(Pair(st_num, st_count))
-    #
-    #     refs = []
-    #     s = fin.readline()
-    #     refs_count  = int(fin.readline().strip())
-    #     for i in range(refs_count):
-    #         refs_row = list(map(int, fin.readline().strip().split()))
-    #         if len(refs_row) == 1:
-    #             refs_row = []
-    #         else:
-    #             refs_row = refs_row[1:]
-    #         refs.append(refs_row)
-    #
-    #     head_points = []
-    #     s = fin.readline()
-    #     head_points_count = int(fin.readline().strip())
-    #     head_points = list(map(int, fin.readline().strip().split()))
-    #
-    #     monster.init_creature(joints, lines, mvlines, turnints, mvstates, refs, head_points)
-    #     monster.fall_unit_angle = fall_unit_angle
-    #     monster.turn_unit_angle = turn_unit_angle
+    global monster, used_reward, k_reward
+
+    with open(filename, "r") as fin:
+        leg_count_str = fin.readline().strip().split('=')
+        leg_count = int(leg_count_str[1].strip())
+
+        robot_height_str = fin.readline().strip().split('=')
+        robot_height = int(robot_height_str[1].strip())
+
+        legs_is_left_str = fin.readline().strip().split(':')
+        legs_is_left = list(map(bool, legs_is_left_str[1].split()))
+
+        coord_systems_transform = {}
+        fin.readline()
+        rz_str = fin.readline().strip().split(':')
+        rz = list(map(float, rz_str[1].split()))
+        coord_systems_transform["Rz"] = rz
+
+        dx_str = fin.readline().strip().split(':')
+        dx = list(map(float, dx_str[1].split()))
+        coord_systems_transform["dx"] = dx
+
+        dy_str = fin.readline().strip().split(':')
+        dy = list(map(float, dy_str[1].split()))
+        coord_systems_transform["dy"] = dy
+
+        dz_str = fin.readline().strip().split(':')
+        dz = list(map(float, dz_str[1].split()))
+        coord_systems_transform["dz"] = dz
+
+        myz_str = fin.readline().strip().split(':')
+        myz = list(map(bool, myz_str[1].split()))
+        coord_systems_transform["Myz"] = myz
+
+        start_foot_points = []
+        fin.readline()
+        for i in range(leg_count):
+            cur_sp = list(map(float, fin.readline().strip().split()))
+            start_foot_points.append(copy.deepcopy(cur_sp))
+
+        leg_states_set = []
+        fin.readline()
+        for i in range(leg_count):
+            leg_id, cou = list(map(int, fin.readline().split()))
+            cur_states_set = []
+            for j in range(cou):
+                cur_p = list(map(float, fin.readline().strip().split()))
+                cur_states_set.append(copy.deepcopy(cur_p))
+            leg_states_set.append(copy.deepcopy(cur_states_set))
+
+        # Reward
+        fin.readline()
+
+        all_dist_str = fin.readline().strip().split('=')
+        fl = int(all_dist_str[1].strip())
+        if (fl == 1):
+            used_reward.append(ALL_DIST)
+
+        prev_step_dist_str = fin.readline().strip().split('=')
+        fl = int(prev_step_dist_str[1].strip())
+        if (fl == 1):
+            used_reward.append(PREV_STEP_DIST)
+
+        center_of_body_str = fin.readline().strip().split('=')
+        fl = int(center_of_body_str[1].strip())
+        if (fl == 1):
+            used_reward.append(CENTER_OF_BODY_Z)
+
+        repeat_action_str = fin.readline().strip().split('=')
+        fl = int(repeat_action_str[1].strip())
+        if (fl == 1):
+            used_reward.append(REPEAT_ACTION)
+
+        k_cob_str = fin.readline().strip().split('=')
+        k = float(k_cob_str[1].strip())
+        k_reward["CENTER_OF_BODY_Z"] = k
+
+        k_ra_str = fin.readline().strip().split('=')
+        k = float(k_ra_str[1].strip())
+        k_reward["REPEAT_ACTION"] = k
+
+        monster = Creature(leg_count, robot_height, legs_is_left, coord_systems_transform, start_foot_points, leg_states_set)
+
 
 def NNet():
     global monster, nnet, used_reward
@@ -223,10 +244,10 @@ def NNet():
     used_reward = [ALL_DIST]
 
 def SaveNNet():
-    global nnet, nnets_dir_str, nnet_finame_start, nnet_finame_end
+    global nnet, nnets_dir_str, creature_name, nnet_finame_end
 
     cur_time = datetime.datetime.now().strftime('%Y%m%d-%H-%M-%S')
-    nnet.save(filepath=os.path.abspath(os.path.join(nnets_dir_str, nnet_finame_start, cur_time, nnet_finame_end)))
+    nnet.save(filepath=os.path.join(nnets_dir_str, creature_name + "_" + cur_time + nnet_finame_end))
 
 def SetInputs():
     global monster
@@ -295,6 +316,8 @@ def GetReward():
         }[i]
         res += rew
 
+        print(res)
+
     return res
 
 def DoNextStep():
@@ -353,7 +376,7 @@ def DoNextStep():
     else:
         same_action_count += 1
 
-    if random.random() < 0.1:
+    if random.random() < 0.3:
         counter = 100
         flag_do = False
         for i in range(counter):
@@ -371,8 +394,8 @@ def DoNextStep():
     prevQ = copy.deepcopy(Q)
 
     #Сохранение модели
-    # if (cur_tick % T == 0):
-    #     SaveNNet()
+    if (cur_tick % T == 0):
+        SaveNNet()
 
 def Timer(tick, coord_syst_lines, leg_lines, point_annotation):
     DoNextStep()
@@ -460,12 +483,13 @@ def Draw(_tick, coord_syst_lines, leg_lines, point_annotation):
     return coord_syst_lines, leg_lines, point_annotation
 
 if __name__ == "__main__":
-    # crfilename = creatures_dir_str + creature_name + creature_finame_end
-    # CreatureInitializationFromFile(crfilename)
-    CreatureInitialization()
+    creature_name = "Hexapod_ad"
+    crfilename = os.path.join(creature_dir_str,  "Hexapod1" + creature_finame_end)
+    CreatureInitializationFromFile(crfilename)
+    # CreatureInitialization()
 
-    # NNet()
-    nnet = load_model('models/model_20200530-23-08-36.h5')
+    NNet()
+    # nnet = load_model('models/model_20200530-23-08-36.h5')
 
     # Создание папок
     directory = os.path.join(nnets_dir_str)

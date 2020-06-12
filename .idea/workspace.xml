@@ -3,10 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="25a9fe41-be0a-41b7-af63-2c7d11d67f5f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Creatures/square_creature.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Creatures/square_img.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/creature.py" beforeDir="false" afterPath="$PROJECT_DIR$/creature.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/creature_end_points.py" beforeDir="false" afterPath="$PROJECT_DIR$/creature_end_points.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_end_points.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_end_points.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp_res.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tmp_res.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prog_for_arduino.py" beforeDir="false" afterPath="$PROJECT_DIR$/prog_for_arduino.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,66 +20,53 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/creature_end_points.py">
+        <entry file="file://$PROJECT_DIR$/main_end_points.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="493" column="123" selection-start-line="493" selection-start-column="123" selection-end-line="493" selection-end-column="123" />
+            <state relative-caret-position="127">
+              <caret line="145" selection-start-line="145" selection-end-line="227" selection-end-column="125" />
               <folding>
-                <element signature="e#2998#3010#0" />
-                <element signature="e#3202#7329#0" />
-                <element signature="e#7382#7944#0" />
-                <element signature="e#7986#9521#0" />
-                <element signature="e#9564#11637#0" />
-                <element signature="e#11680#12796#0" />
-                <element signature="e#12843#13259#0" />
-                <element signature="e#13345#13774#0" />
-                <element signature="e#13847#14178#0" />
-                <element signature="e#14245#15496#0" />
-                <element signature="e#15568#15994#0" />
-                <element signature="e#16030#16231#0" />
-                <element signature="e#16782#17630#0" />
-                <element signature="e#17671#17915#0" />
-                <element signature="e#17963#18031#0" />
-                <element signature="e#18083#18297#0" />
-                <element signature="e#16776#16957#0" />
-                <element signature="e#18329#18353#0" />
-                <element signature="e#18394#18542#0" />
-                <element signature="e#18590#19066#0" />
-                <element signature="e#19119#19156#0" />
-                <element signature="e#19217#19262#0" />
-                <element signature="e#19309#19562#0" />
+                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#1848#3822#0" />
+                <element signature="e#3874#6864#0" />
+                <element signature="e#6883#7429#0" />
+                <element signature="e#7451#7679#0" />
+                <element signature="e#7702#8320#0" />
+                <element signature="e#8514#9407#0" />
+                <element signature="e#9430#9954#0" />
+                <element signature="e#9978#12420#0" />
+                <element signature="e#12660#14069#0" />
+                <element signature="e#14139#15695#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main_end_points.py">
+        <entry file="file://$PROJECT_DIR$/tmp2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="313" column="13" selection-start-line="313" selection-start-column="13" selection-end-line="313" selection-end-column="13" />
+            <state relative-caret-position="102">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="29" column="18" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#1824#4014#0" />
-                <element signature="e#4066#6528#0" />
-                <element signature="e#6291#6829#0" />
-                <element signature="e#6780#7019#0" />
-                <element signature="e#8266#8884#0" />
-                <element signature="e#8914#9055#0" />
-                <element signature="e#9078#9935#0" />
-                <element signature="e#9959#10743#0" />
-                <element signature="e#14212#14286#0" />
-                <element signature="e#14382#15792#0" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/os.py">
+        <entry file="file://$PROJECT_DIR$/Creatures/Hexapod2.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="219" selection-start-line="219" selection-end-line="219" />
+            <state relative-caret-position="306">
+              <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -92,12 +82,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Creature.</find>
-      <find>prev_action</find>
-      <find>prev_inputs</find>
-      <find>nnet.</find>
-      <find>to</find>
-      <find>67.</find>
       <find>68.19859051364821 65.68443629105134 65.79605864031062</find>
       <find>STOP</find>
       <find>(5, [0, 10, -1.0*Creature.robot_height])</find>
@@ -122,6 +106,12 @@
       <find>nnets_dir_str</find>
       <find>directory</find>
       <find>print</find>
+      <find>All</find>
+      <find>[</find>
+      <find>dx</find>
+      <find>fout_res</find>
+      <find>get_ce</find>
+      <find>]</find>
     </findStrings>
     <replaceStrings>
       <replace>])</replace>
@@ -135,6 +125,8 @@
       <replace>creature.dist_xyz</replace>
       <replace>CENTER_OF_GRAVITY_Z</replace>
       <replace>monster</replace>
+      <replace>dx</replace>
+      <replace>dz</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -156,20 +148,26 @@
         <option value="$PROJECT_DIR$/tests.txt" />
         <option value="$PROJECT_DIR$/tests1.txt" />
         <option value="$PROJECT_DIR$/3d_model_v2.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/creature.py" />
-        <option value="$PROJECT_DIR$/prog_for_arduino.py" />
         <option value="$PROJECT_DIR$/common.py" />
+        <option value="$PROJECT_DIR$/prog_for_arduino.py" />
         <option value="$PROJECT_DIR$/creature_end_points.py" />
+        <option value="$PROJECT_DIR$/Creatures/creature_and_nnet.txt" />
+        <option value="$PROJECT_DIR$/Creatures/Hexapod1.txt" />
+        <option value="$PROJECT_DIR$/Res/tmp_res.txt" />
+        <option value="$PROJECT_DIR$/main_end_points_RUN.py" />
+        <option value="$PROJECT_DIR$/models1/tmp2.py" />
         <option value="$PROJECT_DIR$/main_end_points.py" />
+        <option value="$PROJECT_DIR$/creature.py" />
+        <option value="$PROJECT_DIR$/Creatures/Hexapod2.txt" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/tmp2.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
+    <option name="x" value="951" />
     <option name="width" value="978" />
-    <option name="height" value="1048" />
+    <option name="height" value="1039" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -184,6 +182,11 @@
               <item name="3D_model" type="b2602c69:ProjectViewProjectNode" />
               <item name="3D_model" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="3D_model" type="b2602c69:ProjectViewProjectNode" />
+              <item name="3D_model" type="462c0819:PsiDirectoryNode" />
+              <item name="Res_angs" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -196,7 +199,11 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Елена\Desktop\Диплом_Маг\3D_model" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Елена\Desktop\Диплом_Маг\3D_model\Creatures" />
       <recent name="C:\Users\Елена\Desktop\Диплом_Маг\3D_model" />
     </key>
   </component>
@@ -212,49 +219,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main_end_points">
-    <configuration name="3d_model_v2" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="3D_model" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/3d_model_v2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="creature" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="3D_model" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/creature.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.tmp2 (1)">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="3D_model" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -297,7 +262,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="tmp" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="main_end_points_RUN" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="3D_model" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -309,7 +274,49 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tmp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_end_points_RUN.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tmp2 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="3D_model" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tmp2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tmp2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="3D_model" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models1" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\Елена\Desktop\Диплом_Маг\3D_model\tmp2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -320,11 +327,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main_end_points" />
+        <item itemvalue="Python.tmp2 (1)" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.creature" />
-        <item itemvalue="Python.3d_model_v2" />
-        <item itemvalue="Python.tmp" />
+        <item itemvalue="Python.main_end_points" />
+        <item itemvalue="Python.tmp2" />
+        <item itemvalue="Python.main_end_points_RUN" />
       </list>
     </recent_temporary>
   </component>
@@ -342,16 +349,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
+    <frame x="762" y="0" width="781" height="830" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19629875" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29301074" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.36402267" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.57932013" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.43982807" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.296034" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -365,15 +371,6 @@
     </layout>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>533</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="legs" language="Python" />
@@ -556,16 +553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="47" column="49" selection-start-line="47" selection-start-column="49" selection-end-line="47" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/keras/engine/training.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="461">
@@ -587,20 +574,6 @@
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tmp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="62" column="7" selection-start-line="62" selection-start-column="7" selection-end-line="62" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/h5py/_hl/files.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="175" column="24" selection-start-line="175" selection-start-column="18" selection-end-line="175" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -632,32 +605,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/creature.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="441" column="20" lean-forward="true" selection-start-line="441" selection-start-column="20" selection-end-line="441" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#3936#8138#0" />
-            <element signature="e#8191#8913#0" />
-            <element signature="e#8955#10490#0" />
-            <element signature="e#10533#12606#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#6862#9324#0" />
-            <element signature="e#9368#9871#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/3d_model_v2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="621">
@@ -673,83 +620,172 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/os.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3689">
+          <caret line="219" selection-start-line="219" selection-end-line="219" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/prog_for_arduino.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        <state relative-caret-position="193">
+          <caret line="60" column="7" selection-start-line="60" selection-start-column="7" selection-end-line="60" selection-end-column="7" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Creatures/square_creature.txt" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/h5py/_hl/files.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="175" selection-start-line="175" selection-end-line="175" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/keras/utils/io_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="185" selection-start-line="185" selection-end-line="185" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/keras/engine/network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="1089" selection-start-line="1089" selection-end-line="1089" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Res/tmp_res.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="9984" lean-forward="true" selection-start-line="9984" selection-end-line="9984" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Res/Hexapod_100.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="9526" column="28" lean-forward="true" selection-start-line="9526" selection-start-column="28" selection-end-line="9526" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tmp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="61" column="21" selection-end-line="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="47" column="49" selection-start-line="47" selection-start-column="49" selection-end-line="47" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Res/Hexapod_60.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="8939" column="28" lean-forward="true" selection-start-line="8939" selection-start-column="28" selection-end-line="8939" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_end_points_RUN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="384" column="17" lean-forward="true" selection-start-line="384" selection-start-column="17" selection-end-line="384" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Creatures/Hexapod1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="53" column="18" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Creatures/Hexapod2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="229" column="46" lean-forward="true" selection-start-line="229" selection-start-column="46" selection-end-line="229" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/creature.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="516" column="18" selection-start-line="516" selection-start-column="18" selection-end-line="516" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#3936#8138#0" />
+            <element signature="e#8191#8913#0" />
+            <element signature="e#8955#10490#0" />
+            <element signature="e#10533#12606#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/common.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="83" column="44" lean-forward="true" selection-start-line="83" selection-start-column="44" selection-end-line="83" selection-end-column="44" />
+        <state relative-caret-position="493">
+          <caret line="29" column="18" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#1840#1937#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/os.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="219" selection-start-line="219" selection-end-line="219" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/creature_end_points.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="493" column="123" selection-start-line="493" selection-start-column="123" selection-end-line="493" selection-end-column="123" />
-          <folding>
-            <element signature="e#2998#3010#0" />
-            <element signature="e#3202#7329#0" />
-            <element signature="e#7382#7944#0" />
-            <element signature="e#7986#9521#0" />
-            <element signature="e#9564#11637#0" />
-            <element signature="e#11680#12796#0" />
-            <element signature="e#12843#13259#0" />
-            <element signature="e#13345#13774#0" />
-            <element signature="e#13847#14178#0" />
-            <element signature="e#14245#15496#0" />
-            <element signature="e#15568#15994#0" />
-            <element signature="e#16030#16231#0" />
-            <element signature="e#16782#17630#0" />
-            <element signature="e#17671#17915#0" />
-            <element signature="e#17963#18031#0" />
-            <element signature="e#18083#18297#0" />
-            <element signature="e#16776#16957#0" />
-            <element signature="e#18329#18353#0" />
-            <element signature="e#18394#18542#0" />
-            <element signature="e#18590#19066#0" />
-            <element signature="e#19119#19156#0" />
-            <element signature="e#19217#19262#0" />
-            <element signature="e#19309#19562#0" />
-          </folding>
+        <state relative-caret-position="361">
+          <caret line="445" lean-forward="true" selection-start-line="445" selection-end-line="445" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main_end_points.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="313" column="13" selection-start-line="313" selection-start-column="13" selection-end-line="313" selection-end-column="13" />
+        <state relative-caret-position="127">
+          <caret line="145" selection-start-line="145" selection-end-line="227" selection-end-column="125" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#1824#4014#0" />
-            <element signature="e#4066#6528#0" />
-            <element signature="e#6291#6829#0" />
-            <element signature="e#6780#7019#0" />
-            <element signature="e#8266#8884#0" />
-            <element signature="e#8914#9055#0" />
-            <element signature="e#9078#9935#0" />
-            <element signature="e#9959#10743#0" />
-            <element signature="e#14212#14286#0" />
-            <element signature="e#14382#15792#0" />
+            <element signature="e#1848#3822#0" />
+            <element signature="e#3874#6864#0" />
+            <element signature="e#6883#7429#0" />
+            <element signature="e#7451#7679#0" />
+            <element signature="e#7702#8320#0" />
+            <element signature="e#8514#9407#0" />
+            <element signature="e#9430#9954#0" />
+            <element signature="e#9978#12420#0" />
+            <element signature="e#12660#14069#0" />
+            <element signature="e#14139#15695#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tmp2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>

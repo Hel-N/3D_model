@@ -1,12 +1,11 @@
 import copy
 import math
 import random
-import sys
 import time
-import os
 import datetime
+import os
 
-from creature import Creature
+from creature_end_points import Creature
 from common import Test
 
 import matplotlib.pyplot as plt
@@ -20,23 +19,24 @@ import numpy as np
 
 DBL_MAX = 1.79769e+308
 
-fout_res = open("tmp_res.txt", "w")
+fout_res = None
 
 # logout("log.txt")
 # testout("test.txt")
 
 # init_tests_filename = "point_init_tests.txt"
-init_tests_filename = "tests1.txt"
+init_tests_filename = "tests.txt"
 
-res_dir_str = "Res_ang"
+res_dir_str = "Res"
 run_dist_finame_start = "res_dist_" # + текущее время
 run_dist_finame_end = ".txt"
+
 
 creature_dir_str = "Creatures"
 creature_finame_end = ".txt"
 
-nnets_dir_str = "models_angs"
-# nnet_finame_start = "ang_model_" # + текущее время
+nnets_dir_str = "models_points"
+# nnet_finame_start = "point_model_" # + текущее время
 nnet_finame_end = ".h5"
 
 # NNet Config------------------------------------------------------
@@ -63,8 +63,8 @@ REPEAT_ACTION = 3
 used_reward = []
 k_reward = {"CENTER_OF_BODY_Z": 0, "REPEAT_ACTION":0}
 
-T = 100 #Период сохранения модели
-RUN_TYPE = "TRAIN" # "RUN"
+T = 500 #Период сохранения модели
+RUN_TYPE = "RUN" #"TRAIN" # "RUN"
 
 # For Model------------------------------------------------------------
 creature_id = -1
@@ -94,10 +94,6 @@ def CreatureInitialization():
     # Constant----------------------------------------------------------------------------------------------------
     LEG_COUNT = 6
     robot_height = 12  # z
-    # [x, y, z] - начальная и конечная точки
-    # coord_system = [("g", [0, 0, 0], [3, 0, 0]),  # Ox
-    #                 ("b", [0, 0, 0], [0, 3, 0]),  # Oy
-    #                 ("r", [0, 0, 0], [0, 0, 3])]  # Oz
     legs_is_left = [True, True, True, False, False, False]
     coord_systems_transform = {"Rz": [-45, 0, 45, 135, 180, -135],
                               "dx": [25, 17.5, 10, 10, 17.5, 25],
@@ -107,60 +103,43 @@ def CreatureInitialization():
                               "Myz": [False, False, False, True, True, True]}
     start_foot_points = [[0, 12, -1.0 * robot_height], [0, 12, -1.0 * robot_height], [0, 12, -1.0 * robot_height],
                          [0, 12, -1.0 * robot_height], [0, 12, -1.0 * robot_height], [0, 12, -1.0 * robot_height]]
-    # # последнее состояние - начальное
-    # leg_states_set = [
-    #     # 0
-    #     [[90.0, 90.0, 77.561064239824, 77.561064239824, 90.0, 90.0],
-    #      [65.85352803393266, 87.22937300022821, 66.96468639421255, 87.16688822780962, 87.22937300022821, 86.69912724436122],
-    #      [62.38491044515201, 80.38314334918212, 76.53479387112577, 93.64737729881365, 80.38314334918212, 89.05626213516145]],
-    #     # 1
-    #     [[68.19859051364821, 68.19859051364821, 90.0, 90.0, 90.0, 90.0],
-    #      [65.76946313551514, 87.06735350343983, 87.22937300022821, 65.85352803393266, 87.22937300022821, 86.69912724436122],
-    #      [63.30914637883293, 81.21623613932147, 80.38314334918212, 62.38491044515201, 80.38314334918212, 89.05626213516145]],
-    #     # 2
-    #     [[90.0, 90.0, 90.0, 90.0, 102.438935760176, 90.0],
-    #      [65.85352803393266, 87.22937300022821, 65.85352803393266, 87.22937300022821, 87.16688822780962, 86.69912724436122],
-    #      [62.38491044515201, 80.38314334918212, 62.38491044515201, 80.38314334918212, 93.64737729881365, 89.05626213516145]],
-    #     # 3
-    #     [[90.0, 90.0, 102.438935760176, 90.0, 90.0, 90.0],
-    #      [65.85352803393266, 87.22937300022821, 87.16688822780962, 65.85352803393266, 87.22937300022821, 86.69912724436122],
-    #      [62.38491044515201, 80.38314334918212, 93.64737729881365, 62.38491044515201, 80.38314334918212, 89.05626213516145]],
-    #     # 4
-    #     [[90.0, 90.0, 68.19859051364821, 68.19859051364821, 90.0, 90.0],
-    #      [65.85352803393266, 87.22937300022821, 65.76946313551514, 87.06735350343983, 87.22937300022821, 86.69912724436122],
-    #      [62.38491044515201, 80.38314334918212, 63.30914637883293, 81.21623613932147, 80.38314334918212, 89.05626213516145]],
-    #     # 5
-    #     [[77.561064239824, 77.561064239824, 90.0, 90.0, 90.0, 90.0],
-    #      [66.96468639421255, 87.16688822780962, 87.22937300022821, 65.85352803393266, 87.22937300022821, 86.69912724436122],
-    #      [76.53479387112577, 93.64737729881365, 80.38314334918212, 62.38491044515201, 80.38314334918212, 89.05626213516145]]
-    #      ]
-    # последнее состояние - начальное
+
     leg_states_set = [
         # 0
-        [[90.0, 77.561064239824, 90.0],
-         [65.85352803393266, 87.22937300022821, 67.2527731592374, 87.36368870410308, 86.69912724436122],
-         [62.38491044515201, 80.38314334918212, 77.85347317045873, 94.93687188154904, 89.05626213516145]],
+        [[0, 10, -9.0],
+         [0, 10, -12.0],
+         [2.83, 12.83, -9.0],
+         [2.83, 12.83, -12.0],
+         [0, 12, -12.0]],
         # 1
-        [[68.19859051364821, 90.0, 90.0],
-         [65.68443629105134, 86.76633604129218, 87.22937300022821,  65.85352803393266, 86.69912724436122],
-         [65.79605864031062, 83.48200916190999, 80.38314334918212,  62.38491044515201, 89.05626213516145]],
+        [[4, 10, -9.0],
+         [4, 10, -12.0],
+         [0, 10, -12.0],
+         [0, 10, -9.0],
+         [0, 12, -12.0]],
         # 2
-        [[90.0, 102.438935760176, 90.0],
-         [65.85352803393266, 87.22937300022821, 87.36368870410308, 86.69912724436122],
-         [62.38491044515201, 80.38314334918212, 94.93687188154904, 89.05626213516145]],
+        [[0, 10, -9.0],
+         [0, 10, -12.0],
+         [-2.83, 12.83, -12.0],
+         [0, 12, -12.0]],
         # 3
-        [[90.0, 102.438935760176, 90.0],
-         [65.85352803393266, 87.22937300022821, 87.36368870410308, 86.69912724436122],
-         [62.38491044515201, 80.38314334918212, 94.93687188154904, 89.05626213516145]],
+        [[0, 10, -9.0],
+         [0, 10, -12.0],
+         [-2.83, 12.83, -12.0],
+         [0, 12, -12.0]],
         # 4
-        [[90.0, 68.19859051364821, 90.0],
-         [65.85352803393266, 87.22937300022821, 65.68443629105134,  86.76633604129218, 86.69912724436122],
-         [62.38491044515201, 80.38314334918212, 65.79605864031062,  83.48200916190999, 89.05626213516145]],
+        [[0, 10, -9.0],
+         [0, 10, -12.0],
+         [4, 10, -9.0],
+         [4, 10, -12.0],
+         [0, 12, -12.0]],
         # 5
-        [[77.561064239824, 90.0, 90.0],
-         [67.2527731592374, 87.36368870410308, 87.22937300022821,  65.85352803393266, 86.69912724436122],
-         [77.85347317045873, 94.93687188154904, 80.38314334918212,  62.38491044515201, 89.05626213516145]]
-         ]
+        [[2.83, 12.83, -9.0],
+         [2.83, 12.83, -12.0],
+         [0, 10, -12.0],
+         [0, 10, -9.0],
+         [0, 12, -12.0]]
+    ]
     # -------------------------------------------------------------------------------------------------------------
 
     monster = Creature(LEG_COUNT, robot_height, legs_is_left, coord_systems_transform, start_foot_points, leg_states_set)
@@ -209,9 +188,9 @@ def CreatureInitializationFromFile(filename):
         leg_states_set = []
         fin.readline()
         for i in range(leg_count):
-            leg_id = list(map(int, fin.readline().split()))
+            leg_id, cou = list(map(int, fin.readline().split()))
             cur_states_set = []
-            for j in range(3):
+            for j in range(cou):
                 cur_p = list(map(float, fin.readline().strip().split()))
                 cur_states_set.append(copy.deepcopy(cur_p))
             leg_states_set.append(copy.deepcopy(cur_states_set))
@@ -248,34 +227,28 @@ def CreatureInitializationFromFile(filename):
         k_reward["REPEAT_ACTION"] = k
 
         monster = Creature(leg_count, robot_height, legs_is_left, coord_systems_transform, start_foot_points, leg_states_set)
+
+
 def NNet():
-    global monster, nnet
-    # model.add(Dense(number_of_neurons, input_dim=number_of_cols_in_input, activtion=some_activation_function)).
+    global monster, nnet, used_reward
 
     nnet = Sequential()
-    nnet.add(Dense(NUM_HIDDEN_NEURONS, input_dim=3*4*monster.leg_count, activation='tanh'))
-    nnet.add(Dense(NUM_HIDDEN_NEURONS, activation='tanh'))
-    nnet.add(Dense(monster.get_num_actions(), activation='linear'))
+    nnet.add(Dense(NUM_HIDDEN_NEURONS, input_dim=3*4*monster.leg_count, activation=ACT_FUNC)) #'tanh'
+    nnet.add(Dense(NUM_HIDDEN_NEURONS, activation=ACT_FUNC)) # 'tanh'
+    nnet.add(Dense(monster.get_num_actions(), activation=END_ACT_FUNC)) # 'linear'
 
     # nnet.summary()
-
     # nnet.compile(optimizer='rmsprop', loss="mean_squared_error", metrics=["mean_squared_error"])
 
-    nnet.compile(optimizer='rmsprop', loss="mean_squared_error")
+    nnet.compile(optimizer=TRAINING_TYPE, loss="mean_squared_error") # 'rmsprop'
 
-    # X = np.asarray([tests[0].inputs], type=np.float32)
-    # Y = np.asarray([tests[0].outputs], type=np.float32)
-    # X = np.asarray([[5]*(3 * monster.num_joints)], dtype=np.float32)
-    # Y = np.asarray([[1]*monster.get_num_actions()], dtype=np.float32)
-    # nnet.fit(X, Y, epochs=EPOCH, batch_size=min(1, CUR_TESTS_NUMBER), verbose=2)
-    # predictions = nnet.predict(X)
-    # print(predictions)
+    used_reward = [ALL_DIST]
 
 def SaveNNet():
     global nnet, nnets_dir_str, creature_name, nnet_finame_end
 
     cur_time = datetime.datetime.now().strftime('%Y%m%d-%H-%M-%S')
-    nnet.save(filepath=os.path.join(nnets_dir_str, creature_name + "_" + cur_time + nnet_finame_end))
+    nnet.save(filepath=os.path.abspath(os.path.join(nnets_dir_str, creature_name + "_", cur_time, nnet_finame_end)))
 
 def SetInputs():
     global monster
@@ -299,49 +272,40 @@ def SetInputs():
     return copy.deepcopy(inp)
 
 def AddTest(inp, outp):
-    global tests
+    global tests, init_tests_count
     if len(tests) >= TOTAL_TESTS_NUMBER:
-        del tests[0]
+        del tests[init_tests_count]
     tests.append(Test(inp, outp))
 
 def InitTests():
     global init_tests_count, monster, tests
-    with open("tests1.txt", "r") as fin:
+    with open(init_tests_filename, "r") as fin:
         data = fin.readlines()
 
         actions_count = monster.get_num_actions()
 
         for i in range(0, len(data), 6):
             leg_id = int(data[i].strip())
-            angs = list(map(float, data[i+1].strip().split()))
+            end_point = list(map(float, data[i+1].strip().split()))
             inps = list(map(float, data[i+2].strip().split()))
             all_dist = float(data[i+3].strip())
 
-            state_id = None
-            for k in range(len(angs)):
-                state_id = monster.legs[leg_id].find_state(k, angs[k])
-                if (state_id == None):
-                    print("Error!!!!")
+            state_id = monster.legs[leg_id].find_state(end_point)
+            if (state_id == None):
+                print("Error! Не найдено состояние для теста")
 
-                for j in range(leg_id):
-                    state_id += len(monster.legs[j].coxa_states) - 1
-                    state_id += len(monster.legs[j].femur_states) - 1
-                    state_id += len(monster.legs[j].tibia_states) - 1
-                if (k != 0):
-                    state_id += len(monster.legs[leg_id].coxa_states) - 1
-                if (k != 1):
-                    state_id += len(monster.legs[leg_id].femur_states) - 1
+            for j in range(leg_id):
+                state_id += len(monster.legs[j].states) - 1
 
-                outps = [0.0 for i in range(actions_count)]
-                # if (k == 2):
-                outps[state_id] = all_dist
+            outps = [0.0 for i in range(actions_count)]
+            outps[state_id] = all_dist
 
-                AddTest(copy.deepcopy(inps), copy.deepcopy(outps))
+            AddTest(copy.deepcopy(inps), copy.deepcopy(outps))
 
         init_tests_count = len(tests)
 
 def GetReward():
-    global k_reward, used_reward, monster, prev_dist, same_action_count
+    global k_reward, used_reward, monster, prev_dist
 
     res = 0
     for i in range(len(used_reward)):
@@ -353,8 +317,6 @@ def GetReward():
         }[i]
         res += rew
 
-        print(res)
-
     return res
 
 def DoNextStep():
@@ -362,6 +324,7 @@ def DoNextStep():
         prev_inputs, inputs, reward, cur_tick, first_step, \
         Q, prevQ, prev_action, tests, same_action_count
 
+    fout_res.write("{0}       {1}\n".format(cur_tick, monster.get_cur_delta_distance()))
 
     prev_inputs = copy.deepcopy(inputs)
     inputs = SetInputs()
@@ -413,7 +376,7 @@ def DoNextStep():
     else:
         same_action_count += 1
 
-    if random.random() < 0.3:
+    if random.random() < 0.1:
         counter = 100
         flag_do = False
         for i in range(counter):
@@ -431,8 +394,8 @@ def DoNextStep():
     prevQ = copy.deepcopy(Q)
 
     #Сохранение модели
-    if (cur_tick % T == 0):
-        SaveNNet()
+    # if (cur_tick % T == 0):
+    #     SaveNNet()
 
 def Timer(tick, coord_syst_lines, leg_lines, point_annotation):
     DoNextStep()
@@ -471,17 +434,17 @@ def InitDraw(ax):
         point_annotation.append(ax.text3D(end_p[0] + dx, end_p[1] + dy, end_p[2], i, None))
 
     # Setting the axes properties
-    ax.set_xlim3d([-10.0, 50.0])
+    ax.set_xlim3d([-20.0, 50.0])
     ax.set_xlabel('X')
 
-    ax.set_ylim3d([-10.0, 40.0])
+    ax.set_ylim3d([-10.0, 50.0])
     ax.set_ylabel('Y')
 
     ax.set_zlim3d([0.0, 30.0])
     ax.set_zlabel('Z')
 
-def Draw(tick, coord_syst_lines, leg_lines, point_annotation):
-    global monster #, legs , coord_system, steps, pause
+def Draw(_tick, coord_syst_lines, leg_lines, point_annotation):
+    global monster
 
     for i in range(len(monster.legs)):
         cur_coord_syst = monster.legs[i].coord_system_for_plot(monster.cur_delta_distance_xyz)
@@ -505,23 +468,42 @@ def Draw(tick, coord_syst_lines, leg_lines, point_annotation):
         point_annotation[i].set_position([end_p[0] + dx, end_p[1] + dy])
         point_annotation[i].set_3d_properties(end_p[2])
 
-    # time.sleep(pause[tick] / 10000000)
+
+    # Setting the axes properties
+    cur_delta_distance_xyz = monster.cur_delta_distance_xyz
+    ax.set_xlim3d([-20.0 + cur_delta_distance_xyz[0], 50.0 + cur_delta_distance_xyz[0]])
+    ax.set_xlabel('X')
+
+    ax.set_ylim3d([-10.0 + cur_delta_distance_xyz[1], 50.0 + cur_delta_distance_xyz[1]])
+    ax.set_ylabel('Y')
+
+    ax.set_zlim3d([0.0 + cur_delta_distance_xyz[2], 30.0 + cur_delta_distance_xyz[2]])
+    ax.set_zlabel('Z')
 
     return coord_syst_lines, leg_lines, point_annotation
 
 if __name__ == "__main__":
-    creature_name = "Hexapod_ad"
-    crfilename = os.path.join(creature_dir_str, "Hexapod2" + creature_finame_end)
+    creature_name = "Hexapod1"
+    crfilename = os.path.join(creature_dir_str,  creature_name + creature_finame_end)
     CreatureInitializationFromFile(crfilename)
     # CreatureInitialization()
 
-    NNet()
-    # nnet = load_model('models/model_20200530-23-08-36.h5')
+    cn = "Hexapod_100"
+
+    # NNet()
+    # model_path = os.path.join(nnets_dir_str, creature_name + '_20200530-23-08-36.h5')
+    # model_path = os.path.join("models_points", cn + '_20200610-04-33-01.h5')
+    model_path = os.path.join("models", "model" + '_20200530-23-08-36.h5')
+    nnet = load_model(model_path)
 
     # Создание папок
-    directory = os.path.join(nnets_dir_str)
+    directory = os.path.join(res_dir_str)
     if not os.path.exists(directory):
         os.makedirs(directory)
+
+    fout_res = open(os.path.join(res_dir_str, cn + ".txt"), "w")
+
+
 
     # Attaching 3D axis to the figure
     fig = plt.figure()

@@ -15,8 +15,8 @@ from keras.layers import Dense
 import numpy as np
 
 # Arduino
-# ser=serial.Serial("/dev/ttyACM0",9600)  #change ACM number as found from ls /dev/tty/ACM*
-# ser.baudrate=9600
+ser=serial.Serial("/dev/ttyACM0",9600)  #change ACM number as found from ls /dev/tty/ACM*
+ser.baudrate=9600
 
 DBL_MAX = 1.79769e+308
 
@@ -326,6 +326,8 @@ def SendAngsToArduino(action):
     for i in range(len(angs)):
         ser.write(str.encode("{0} {1} {2}#".format(leg_id, i, angs[i])))
         time.sleep(0.5)
+        msg = ser.readline()
+        print(msg)
     time.sleep(0.5)
 
 def DoNextStep():
@@ -351,8 +353,8 @@ def DoNextStep():
 
     # fout_res.write("{}     {}\n".format(cur_tick-1, prev_dist))
 
-    print(cur_tick)
-    print("All dist: {0}".format(prev_dist))
+    # print(cur_tick)
+    # print("All dist: {0}".format(prev_dist))
 
     if (not first_step):
         [Q] = nnet.predict(np.asarray([SetInputs()], dtype=np.float32))
@@ -382,8 +384,9 @@ def DoNextStep():
         first_step = False
 
     if (action != prev_action): # ?
+        print(cur_tick)
         monster.update_pos(action_num=action)
-        # SendAngsToArduino(action)
+        SendAngsToArduino(action)
 
     # if random.random() < 0.1:
     #     counter = 100
@@ -438,20 +441,20 @@ if __name__ == "__main__":
     print("ok")
     # InitTests()
 
-    # msg = ser.readline()
-    # print(msg)
-    # while True:
-    #     msg = ser.readline()
-    #     print(msg)
-    #     if (msg == str.encode("Ready!\r\n")):
-    #         print("Arduino is ready!\n")
-    #         ser.write(str.encode("Go"))
-    #         msg = ser.readline()
-    #         print(msg)
-    #         break
+    msg = ser.readline()
+    print(msg)
+    while True:
+        msg = ser.readline()
+        print(msg)
+        if (msg == str.encode("Ready!\r\n")):
+            print("Arduino is ready!\n")
+            ser.write(str.encode("Go"))
+            msg = ser.readline()
+            print(msg)
+            break
 
-    # while True:
-    for i in range(10):
+    while True:
+    # for i in range(10):
         DoNextStep()
         # ser.write(str.encode(msgs_array[i][j] + '#'))
         #

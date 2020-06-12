@@ -492,6 +492,16 @@ class Creature:
                self.cur_body_center[2] - self.start_body_center[2])
         return res
 
+    def get_center_of_body(self):
+        res = 1e6
+        for i in range(len(self.legs)):
+            end_point = self.legs[i].end_point
+            if (end_point[2] < res):
+                res = end_point[2]
+        return [self.cur_body_center[0],
+                self.cur_body_center[1],
+                self.cur_body_center[2] - math.fabs(-self.robot_height - res)]
+
     def head_z(self):
         return self.robot_height
 

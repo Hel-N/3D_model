@@ -432,7 +432,7 @@ class Creature:
 
     def get_center_of_body(self):
         res = 1e6
-        for i in range(self.legs):
+        for i in range(len(self.legs)):
             end_point = self.legs[i].end_point
             if (end_point[2] < res):
                 res = end_point[2]
