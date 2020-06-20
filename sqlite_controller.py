@@ -21,55 +21,136 @@ def create_connection(db_file):
     return conn
 
 def create_db(connect, cursor):
-    cursor.execute('''CREATE TABLE IF NOT EXISTS dataset
-                 (id integer PRIMARY KEY AUTOINCREMENT,
-                 leg_id integer,
-                 end_point text,
-                 angs text,
-                 ts text)''')
-
+    cursor.execute('''CREATE TABLE IF NOT EXISTS neuro_net
+                 (nnet_id integer PRIMARY KEY AUTOINCREMENT,
+                 name text,
+                 config_json text)''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS learning_algorithm
+                (algo_id integer PRIMARY KEY AUTOINCREMENT,
+                name text,
+                config_json text)''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS creature
+                (creature_id integer PRIMARY KEY AUTOINCREMENT,
+                name text,
+                config_json text)''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS system_config
+                    (sys_conf_id integer PRIMARY KEY AUTOINCREMENT,
+                    name text,
+                    nnet_id integer,
+                    algo_id integer,
+                    creature_id integer,
+                    running_type text)''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS history
+                    (id integer PRIMARY KEY AUTOINCREMENT,
+                    sys_conf_id integer,
+                    weights text,
+                    biases text,
+                    additional_data text,
+                    ts text)''')
     connect.commit()
 
-def add_dataset_row(connect, cursor, leg_id, end_point, angs):
-    ts = str(datetime.now())
-    cursor.executemany("INSERT INTO dataset(leg_id, end_point, angs, ts) VALUES (?,?,?,?)", [(leg_id, str(end_point), str(angs), ts)])
+
+def add_creature(connect, cursor, data):
+    cursor.executemany("INSERT INTO creature(name, config_json) VALUES (?,?)", data)
     connect.commit()
 
-def get_dataset(connect, cursor, ts1, ts2):
-    cursor.execute("SELECT * FROM dataset where ts between ts1 and ts2")
+def add_neuro_net(connect, cursor, data):
+    cursor.executemany("INSERT INTO neuro_net(name, config_json) VALUES (?,?)", data)
+    connect.commit()
+
+def add_learning_algorithm(connect, cursor, data):
+    cursor.executemany("INSERT INTO learning_algorithm(name, config_json) VALUES (?,?)", data)
+    connect.commit()
+
+def add_system_config(connect, cursor, data):
+    cursor.executemany("INSERT INTO system_config(name, nnet_id, algo_id, creature_id, running_type) VALUES (?,?,?,?,?)", data)
+    connect.commit()
+
+def add_history(connect, cursor, data):
+    cursor.executemany("INSERT INTO history(sys_conf_id, weights, biases, additional_data, ts) VALUES (?,?,?,?,?)", data)
+    connect.commit()
+
+def get_creatures(cursor):
+    cursor.execute("SELECT * FROM creature")
     return cursor.fetchall()
 
-def get_all_dataset(connect, cursor):
-    cursor.execute("SELECT * FROM dataset")
+def get_creature(cursor, name, config_json):
+    cursor.execute("SELECT * FROM creature WHERE name=\'" + name + "\' and config_json=\'"+ config_json +"\'")
     return cursor.fetchall()
+
+def get_neuro_nets(cursor):
+    cursor.execute("SELECT * FROM neuro_net")
+    return cursor.fetchall()
+
+def get_neuro_net(cursor, name, config_json):
+    cursor.execute("SELECT * FROM neuro_net WHERE name=\'" + name + "\' and config_json=\'"+ config_json +"\'")
+    return cursor.fetchall()
+
+def get_learning_algorithms(cursor):
+    cursor.execute("SELECT * FROM learning_algorithm")
+    return cursor.fetchall()
+
+def get_learning_algorithm(cursor, name, config_json):
+    cursor.execute("SELECT * FROM learning_algorithm WHERE name=\'" + name + "\' and config_json=\'"+ config_json +"\'")
+    return cursor.fetchall()
+
+def get_system_configs(cursor):
+    cursor.execute("SELECT * FROM system_config")
+    return cursor.fetchall()
+
+def get_system_config(cursor, name, nnet_id, algo_id, creature_id, running_type):
+    cursor.execute("SELECT * FROM system_config WHERE name=\'" + name + "\'" +
+                   " and nnet_id=" + str(nnet_id) +
+                   " and algo_id=" + str(algo_id) +
+                   " and creature_id=" + str(creature_id) +
+                   " and running_type=\'" + running_type + "\'"
+                   )
+    return cursor.fetchall()
+
+def get_histories(cursor):
+    cursor.execute("SELECT * FROM history")
+    return cursor.fetchall()
+
+if __name__ == "__main__":
+    connect = create_connection('ModelDB.db')
+
+    with connect:
+        cursor = connect.cursor()
+        create_db(connect, cursor)
+
 
 # def create_db(connect, cursor):
-#     cursor.execute('''CREATE TABLE IF NOT EXISTS neuro_net
-#                  (nnet_id integer PRIMARY KEY AUTOINCREMENT,
-#                  name text,
-#                  config_json text)''')
-#     cursor.execute('''CREATE TABLE IF NOT EXISTS learning_algorithm
-#                 (algo_id integer PRIMARY KEY AUTOINCREMENT,
-#                 name text,
-#                 config_json text)''')
-#     cursor.execute('''CREATE TABLE IF NOT EXISTS creature
-#                 (creature_id integer PRIMARY KEY AUTOINCREMENT,
-#                 name text,
-#                 config_json text)''')
-#     cursor.execute('''CREATE TABLE IF NOT EXISTS system_config
-#                     (sys_conf_id integer PRIMARY KEY AUTOINCREMENT,
-#                     nnet_id integer,
-#                     algo_id integer,
-#                     creature_id integer,
-#                     running_type text)''')
-#     cursor.execute('''CREATE TABLE IF NOT EXISTS history
-#                     (id integer PRIMARY KEY AUTOINCREMENT,
-#                     sys_conf_id integer,
-#                     weights text,
-#                     biases text,
-#                     additional_data text,
-#                     ts text)''')
+#     cursor.execute('''CREATE TABLE IF NOT EXISTS dataset
+#                  (id integer PRIMARY KEY AUTOINCREMENT,
+#                  leg_id integer,
+#                  end_point text,
+#                  angs text,
+#                  ts text)''')
+#
 #     connect.commit()
+#
+# def add_dataset_row(connect, cursor, leg_id, end_point, angs):
+#     ts = str(datetime.now())
+#     cursor.executemany("INSERT INTO dataset(leg_id, end_point, angs, ts) VALUES (?,?,?,?)", [(leg_id, str(end_point), str(angs), ts)])
+#     connect.commit()
+#
+# def get_dataset(connect, cursor, ts1, ts2):
+#     cursor.execute("SELECT * FROM dataset where ts between ts1 and ts2")
+#     return cursor.fetchall()
+#
+# def get_all_dataset(connect, cursor):
+#     cursor.execute("SELECT * FROM dataset")
+#     return cursor.fetchall()
+# ----------------------------------------------------------------------------------------------------------------------
+
+# def get_data_neuro_net():
+#     name = "nnet_1"
+#     config_json = json.dumps({"Inputs count": 18,
+#                               "Layers count": 3,
+#                               "Neurons count": "54 100 54",
+#                               "Outputs count": 36,
+#                               "Act Functions": "LINE TANH TANH"})
+#     return [(name, str(config_json))]
 #
 # def add_neuro_net(connect, cursor, data):
 #     cursor.executemany("INSERT INTO neuro_net(name, config_json) VALUES (?,?)", data)
@@ -313,17 +394,17 @@ def get_all_dataset(connect, cursor):
 
 
 
-if __name__ == "__main__":
-    connect = create_connection('3DModelDB.db')
-
-    with connect:
-        cursor = connect.cursor()
-        # create_db(connect, cursor)
-        # cursor.execute("DROP TABLE dataset")
-        # connect.commit()
-
-        dts = get_all_dataset(connect, cursor)
-        [print(str(el) + '\n') for el in dts]
+# if __name__ == "__main__":
+#     connect = create_connection('3DModelDB.db')
+#
+#     with connect:
+#         cursor = connect.cursor()
+#         # create_db(connect, cursor)
+#         # cursor.execute("DROP TABLE dataset")
+#         # connect.commit()
+#
+#         dts = get_all_dataset(connect, cursor)
+#         [print(str(el) + '\n') for el in dts]
 
 
 

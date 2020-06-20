@@ -464,6 +464,41 @@ class Creature:
 
         return leg_id, state_num
 
+    def can_do_action(self, action_num):
+        leg_id, state_num = self.get_action(action_num)
+        end_p = self.legs[leg_id].states[state_num]
+
+        if (math.fabs(-self.robot_height - end_p[2]) > self.ground_eps):
+            leg_up = []
+            for i in range(self.leg_count):
+                # if (i == leg_id):
+                #     continue
+                if (math.fabs(-self.robot_height - self.legs[i].end_point[2]) > self.ground_eps):
+                    leg_up.append(i)
+
+            if (leg_id in leg_up):
+                return True
+
+            if (len(leg_up) >= 3):
+                return False
+
+            if (len(leg_up) == 0 or len(leg_up) == 1):
+                return True
+
+            leg_up.append(leg_id)
+            leg_up.sort()
+            fl = False
+            for i in range(len(leg_up)):
+                if (abs(leg_up[i-1] - leg_up[i]) > 1 and
+                        (leg_up[i-1] not in [0, 5]) and
+                        (leg_up[i] not in [0, 5])):
+                    fl = True
+
+            return fl
+        else:
+            return True
+
+
     def move(self, leg_id, new_end_point):
         self.legs[leg_id].move(new_end_point)
 

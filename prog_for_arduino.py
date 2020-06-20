@@ -323,12 +323,13 @@ def SendAngsToArduino(action):
     leg_id, _ = monster.get_action(action)
     angs = monster.legs[leg_id].servo_angs()
 
-    for i in range(len(angs)):
-        ser.write(str.encode("{0} {1} {2}#".format(leg_id, i, angs[i])))
-        time.sleep(0.5)
-        msg = ser.readline()
-        print(msg)
-    time.sleep(0.5)
+    print("RPI  {0} {1} {2} {3} #".format(leg_id, angs[0], angs[1], angs[2]))
+
+    ser.write(str.encode("{0} {1} {2} {3} #".format(leg_id, angs[0], angs[1], angs[2])))
+
+    msg = ser.readline()
+    print(msg)
+    time.sleep(5)
 
 def DoNextStep():
     global recovery_from_falling, monster, prev_dist, \
@@ -353,7 +354,7 @@ def DoNextStep():
 
     # fout_res.write("{}     {}\n".format(cur_tick-1, prev_dist))
 
-    # print(cur_tick)
+    print(cur_tick)
     # print("All dist: {0}".format(prev_dist))
 
     if (not first_step):
@@ -388,17 +389,18 @@ def DoNextStep():
         monster.update_pos(action_num=action)
         SendAngsToArduino(action)
 
-    # if random.random() < 0.1:
-    #     counter = 100
-    #     flag_do = False
-    #     for i in range(counter):
-    #         action = random.randint(0, monster.get_num_actions() - 1)
-    #         # if monster.can_do_action(action):
-    #         flag_do = True
-    #         break
-    #     if flag_do:
-    #         if (action != prev_action): # ?
-    #             monster.update_pos(action_num=action)
+    if random.random() < 0.1:
+        counter = 100
+        flag_do = False
+        for i in range(counter):
+            action = random.randint(0, monster.get_num_actions() - 1)
+            # if monster.can_do_action(action):
+            flag_do = True
+            break
+        if flag_do:
+            if (action != prev_action): # ?
+                monster.update_pos(action_num=action)
+                SendAngsToArduino(action)
 
     prev_action = action
     prevQ = copy.deepcopy(Q)
@@ -449,9 +451,12 @@ if __name__ == "__main__":
         if (msg == str.encode("Ready!\r\n")):
             print("Arduino is ready!\n")
             ser.write(str.encode("Go"))
-            msg = ser.readline()
+            msg = ""
+            while (msg != str.encode("Go!\r\n")):
+                msg = ser.readline()
             print(msg)
             break
+
 
     while True:
     # for i in range(10):

@@ -4,9 +4,11 @@ import random
 import time
 import datetime
 import os
+import json
 
 from creature_end_points import Creature
 from common import Test
+import sqlite_controller
 
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.axes3d as p3
@@ -19,7 +21,10 @@ import numpy as np
 
 DBL_MAX = 1.79769e+308
 
-fout_res = open("tmp_res.txt", "w")
+connect = sqlite_controller.create_connection('ModelDB.db')
+cursor = connect.cursor()
+
+# fout_res = open("tmp_res.txt", "w")
 
 # logout("log.txt")
 # testout("test.txt")
@@ -40,8 +45,9 @@ nnet_finame_end = ".h5"
 
 # NNet Config------------------------------------------------------
 nnet_id = -1
+algo_id = -1
+sys_conf_id = -1
 nnet_name = ""
-creature_name = ""
 NUM_HIDDEN_LAYERS = 2
 NUM_HIDDEN_NEURONS = 100
 ACT_FUNC = 'tanh'
@@ -87,8 +93,99 @@ monster = None
 tests = list(map(Test, []))
 init_tests_count = 0
 
-def CreatureInitialization():
+cur_rew_params = [0, 0, 0, 0]
+# ---SQL-----------------------------------------------------------------------------------------
+def get_data_creature(name, legs_is_left, coord_systems_transform, states, states_type):
     global monster
+
+    angs = []
+    points = []
+    for i in range(monster.leg_count):
+        angs.append(monster.legs[i].angs)
+        points.append(monster.legs[i].end_point)
+
+    config_json = json.dumps({"leg_count": monster.leg_count,
+                              "servo_count": monster.leg_count*3,
+                              "legs_is_left": legs_is_left,
+                              "coord_systems_transform": coord_systems_transform,
+                              "states_type": states_type,
+                              "states": states,
+                              "stert_pos":{
+                                  "angs": angs,
+                                  "points": points
+                              }}
+    )
+
+    return [(name, str(config_json))]
+
+def get_data_neuro_net(name):
+    global nnet
+
+    inputs_count = 56
+    layers_count = len(nnet.layers)
+    neurons_count = [l.output_shape[1] for l in nnet.layers]
+    outputs_count = neurons_count[-1]
+    act_functions = [l.get_config()["activation"] for l in nnet.layers]
+
+    config_json = json.dumps({"inputs_count": inputs_count,
+                              "layers_count": layers_count,
+                              "neurons_count": " ".join([str(nc) for nc in neurons_count]),
+                              "outputs_count": outputs_count,
+                              "act_functions": " ".join(act_functions)})
+    return [(name, str(config_json))]
+
+def get_data_learning_algorithm(name):
+    global nnet
+
+    learning_rate = nnet.optimizer.get_config()["lr"]
+    config_json = json.dumps({"type": TRAINING_TYPE,
+                              "epoch": EPOCH,
+                              "learning_rate": learning_rate,
+                              "train_accuracy": 0.00001,
+                              "qgamma": QGAMMA})
+    return [(name, str(config_json))]
+
+def get_data_system_config(name):
+    global nnet_id, algo_id, creature_id
+    running_type = RUN_TYPE
+    return [(name, nnet_id, algo_id, creature_id, running_type)]
+
+def get_data_history(leg_id, joint_id, ang, end_point, all_dist, prev_step_dist, cbz, repeat_action, reward, dist):
+    global monster
+
+    weights = []
+    biases = []
+
+    angs = []
+    for i in range(monster.leg_count):
+        angs.append(monster.legs[i].angs)
+
+    additional_data = json.dumps({
+        "cur_pos": angs,
+        "step": {
+            "leg_id": leg_id,
+            "joint_id": joint_id,
+            "ang": ang,
+            "end_point": end_point
+        },
+        "ALL_DIST": all_dist,
+        "PREV_STEP_DIST": prev_step_dist,
+        "CENTER_OF_BODY_Z": cbz,
+        "REPEAT_ACTION": repeat_action,
+        "reward": reward,
+        "dist": dist
+    })
+
+    ts = str(datetime.datetime.now())
+
+    return [(sys_conf_id, str(weights), str(biases), str(additional_data), ts)]
+
+# -----------------------------------------------------------------------------------------------
+
+
+
+def CreatureInitialization():
+    global monster, creature_name
 
     # Constant----------------------------------------------------------------------------------------------------
     LEG_COUNT = 6
@@ -143,8 +240,9 @@ def CreatureInitialization():
 
     monster = Creature(LEG_COUNT, robot_height, legs_is_left, coord_systems_transform, start_foot_points, leg_states_set)
 
+
 def CreatureInitializationFromFile(filename):
-    global monster, used_reward, k_reward
+    global monster, used_reward, k_reward, creature_name, creature_id
 
     with open(filename, "r") as fin:
         leg_count_str = fin.readline().strip().split('=')
@@ -227,6 +325,17 @@ def CreatureInitializationFromFile(filename):
 
         monster = Creature(leg_count, robot_height, legs_is_left, coord_systems_transform, start_foot_points, leg_states_set)
 
+        # ---SQL----------------------------------
+        creature_data = get_data_creature( creature_name, legs_is_left, coord_systems_transform,
+                                          states=leg_states_set, states_type="points")
+        cr = sqlite_controller.get_creature(cursor, creature_data[0][0], creature_data[0][1])
+        if (len(cr) == 0):
+            sqlite_controller.add_creature(connect, cursor, creature_data)
+            cr = sqlite_controller.get_creature(cursor, creature_data[0][0], creature_data[0][1])
+            creature_id = cr[0][0]
+        else:
+            creature_id = cr[0][0]
+
 
 def NNet():
     global monster, nnet, used_reward
@@ -304,7 +413,7 @@ def InitTests():
         init_tests_count = len(tests)
 
 def GetReward():
-    global k_reward, used_reward, monster, prev_dist
+    global k_reward, used_reward, monster, prev_dist, cur_rew_params
 
     res = 0
     for i in range(len(used_reward)):
@@ -315,6 +424,7 @@ def GetReward():
             REPEAT_ACTION: -k_reward["REPEAT_ACTION"] / max(1.0, same_action_count)
         }[i]
         res += rew
+        cur_rew_params[i] = rew
 
         print(res)
 
@@ -323,7 +433,7 @@ def GetReward():
 def DoNextStep():
     global nnet, recovery_from_falling, monster, prev_dist, \
         prev_inputs, inputs, reward, cur_tick, first_step, \
-        Q, prevQ, prev_action, tests, same_action_count
+        Q, prevQ, prev_action, tests, same_action_count, cur_rew_params
 
 
     prev_inputs = copy.deepcopy(inputs)
@@ -373,6 +483,14 @@ def DoNextStep():
     if (action != prev_action and monster.can_do_action(action)):
         monster.update_pos(action_num=action)
         same_action_count = 0
+        # ---SQL-------------
+        leg_id, state_num = monster.get_action(action)
+        point = monster.legs[leg_id].states[state_num]
+        rw = GetReward()
+        history_data = get_data_history(leg_id, "-", "-", point, cur_rew_params[0], cur_rew_params[1],
+                                        cur_rew_params[2], cur_rew_params[3], rw, monster.get_cur_delta_distance())
+        sqlite_controller.add_history(connect, cursor, history_data)
+        # -------------------
     else:
         same_action_count += 1
 
@@ -387,6 +505,15 @@ def DoNextStep():
             if (action != prev_action and monster.can_do_action(action)):
                 monster.update_pos(action_num=action)
                 same_action_count = 0
+                # ---SQL-------------
+                leg_id, state_num = monster.get_action(action)
+                point = monster.legs[leg_id].states[state_num]
+                rw = GetReward()
+                history_data = get_data_history(leg_id, "-", "-", point, cur_rew_params[0], cur_rew_params[1],
+                                                cur_rew_params[2], cur_rew_params[3], rw,
+                                                monster.get_cur_delta_distance())
+                sqlite_controller.add_history(connect, cursor, history_data)
+                # -------------------
             else:
                 same_action_count += 1
 
@@ -483,32 +610,75 @@ def Draw(_tick, coord_syst_lines, leg_lines, point_annotation):
     return coord_syst_lines, leg_lines, point_annotation
 
 if __name__ == "__main__":
-    creature_name = "Hexapod_ad"
+    creature_name = "Hexapod1"
     crfilename = os.path.join(creature_dir_str,  "Hexapod1" + creature_finame_end)
     CreatureInitializationFromFile(crfilename)
     # CreatureInitialization()
 
+
+
     #NNet()
     nnet = load_model('models/model_20200530-23-08-36.h5')
 
-    # Создание папок
-    directory = os.path.join(nnets_dir_str)
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+    # ---SQL-----
+    nnet_data = get_data_neuro_net("NNet_1")
+    nn = sqlite_controller.get_neuro_net(cursor, nnet_data[0][0], nnet_data[0][1])
+    if (len(nn) == 0):
+        sqlite_controller.add_neuro_net(connect, cursor, nnet_data)
+        nn = sqlite_controller.get_neuro_net(cursor, nnet_data[0][0], nnet_data[0][1])
+        nnet_id = nn[0][0]
+    else:
+        nnet_id = nn[0][0]
 
-    # Attaching 3D axis to the figure
-    fig = plt.figure()
-    ax = p3.Axes3D(fig)
-
-    #InitTests()
-
-    InitDraw(ax)
-
-    line_animation = animation.FuncAnimation(fig, Timer, frames=TICK_COUNT,
-                                             fargs=(coord_syst_lines, leg_lines, point_annotation),
-                                             interval=25, blit=False)
-    plt.show()
+    algo_data = get_data_learning_algorithm("RMS_1")
+    la = sqlite_controller.get_learning_algorithm(cursor, algo_data[0][0], algo_data[0][1])
+    if (len(la) == 0):
+        sqlite_controller.add_learning_algorithm(connect, cursor, algo_data)
+        la = sqlite_controller.get_learning_algorithm(cursor, algo_data[0][0], algo_data[0][1])
+        algo_id = la[0][0]
+    else:
+        algo_id = la[0][0]
 
 
 
+    sysconf_data = get_data_system_config("Hexapod1_100")
+    sc = sqlite_controller.get_system_config(cursor, sysconf_data[0][0], sysconf_data[0][1], sysconf_data[0][2],
+                                             sysconf_data[0][3], sysconf_data[0][4])
+    if (len(sc) == 0):
+        sqlite_controller.add_system_config(connect, cursor, sysconf_data)
+        sc = sqlite_controller.get_system_config(cursor, sysconf_data[0][0], sysconf_data[0][1], sysconf_data[0][2],
+                                                 sysconf_data[0][3], sysconf_data[0][4])
+        sys_conf_id = sc[0][0]
+    else:
+        sys_conf_id = sc[0][0]
+
+
+    # print("\n".join([str(s) for s in sqlite_controller.get_creatures(cursor)]))
+    # print("\n".join([str(s) for s in sqlite_controller.get_neuro_nets(cursor)]))
+    # print("\n".join([str(s) for s in sqlite_controller.get_learning_algorithms(cursor)]))
+    # print("\n".join([str(s) for s in sqlite_controller.get_system_configs(cursor)]))
+    print("\n".join([str(s) for s in sqlite_controller.get_histories(cursor)]))
+
+    # ---SQL-end-----
+
+    # # Создание папок
+    # directory = os.path.join(nnets_dir_str)
+    # if not os.path.exists(directory):
+    #     os.makedirs(directory)
+    #
+    # # Attaching 3D axis to the figure
+    # fig = plt.figure()
+    # ax = p3.Axes3D(fig)
+    #
+    # #InitTests()
+    #
+    # InitDraw(ax)
+    #
+    # line_animation = animation.FuncAnimation(fig, Timer, frames=TICK_COUNT,
+    #                                          fargs=(coord_syst_lines, leg_lines, point_annotation),
+    #                                          interval=25, blit=False)
+    # plt.show()
+    #
+    #
+    #
 

@@ -3,13 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="25a9fe41-be0a-41b7-af63-2c7d11d67f5f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Creatures/square_creature.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Creatures/square_img.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/creature.py" beforeDir="false" afterPath="$PROJECT_DIR$/creature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3DModelDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/3DModelDB.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/creature_end_points.py" beforeDir="false" afterPath="$PROJECT_DIR$/creature_end_points.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_end_points.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_end_points.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prog_for_arduino.py" beforeDir="false" afterPath="$PROJECT_DIR$/prog_for_arduino.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sqlite_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/sqlite_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp2.py" beforeDir="false" afterPath="$PROJECT_DIR$/tmp2.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,54 +18,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main_end_points.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main_end_points_db.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="145" selection-start-line="145" selection-end-line="227" selection-end-column="125" />
+            <state relative-caret-position="4344">
+              <caret line="666" column="32" selection-start-line="666" selection-start-column="32" selection-end-line="666" selection-end-column="32" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#1848#3822#0" />
-                <element signature="e#3874#6864#0" />
-                <element signature="e#6883#7429#0" />
-                <element signature="e#7451#7679#0" />
-                <element signature="e#7702#8320#0" />
-                <element signature="e#8514#9407#0" />
-                <element signature="e#9430#9954#0" />
-                <element signature="e#9978#12420#0" />
-                <element signature="e#12660#14069#0" />
-                <element signature="e#14139#15695#0" />
+                <element signature="e#2025#2798#0" />
+                <element signature="e#2947#3256#0" />
+                <element signature="e#3614#3999#0" />
+                <element signature="e#4021#4209#0" />
+                <element signature="e#3339#5328#0" />
+                <element signature="e#6164#9796#0" />
+                <element signature="e#8347#8893#0" />
+                <element signature="e#8915#9143#0" />
+                <element signature="e#9166#9784#0" />
+                <element signature="e#9814#9955#0" />
+                <element signature="e#9978#10871#0" />
+                <element signature="e#14024#14098#0" />
+                <element signature="e#14194#15603#0" />
+                <element signature="e#15673#17253#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tmp2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common.py">
+        <entry file="file://$PROJECT_DIR$/sqlite_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="18" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+            <state relative-caret-position="175">
+              <caret line="109" column="17" selection-start-line="109" selection-start-column="4" selection-end-line="109" selection-end-column="17" />
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#0#14#0" expanded="true" />
+                <element signature="e#109#429#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Creatures/Hexapod2.txt">
+        <entry file="file://$PROJECT_DIR$/Creatures/Hexapod1.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+            <state relative-caret-position="-357">
+              <caret line="3" column="23" selection-start-line="3" selection-end-line="3" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -82,11 +77,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>68.19859051364821 65.68443629105134 65.79605864031062</find>
-      <find>STOP</find>
-      <find>(5, [0, 10, -1.0*Creature.robot_height])</find>
-      <find>67</find>
-      <find>,</find>
       <find>87.22937300022821</find>
       <find>94.</find>
       <find>get_</find>
@@ -109,9 +99,14 @@
       <find>All</find>
       <find>[</find>
       <find>dx</find>
-      <find>fout_res</find>
       <find>get_ce</find>
       <find>]</find>
+      <find>lea</find>
+      <find>fout_res</find>
+      <find>get_creature</find>
+      <find>act</find>
+      <find>lr</find>
+      <find>get_all_dataset</find>
     </findStrings>
     <replaceStrings>
       <replace>])</replace>
@@ -140,7 +135,6 @@
         <option value="$PROJECT_DIR$/test1" />
         <option value="$PROJECT_DIR$/NeuroNet.py" />
         <option value="$PROJECT_DIR$/3d_model_v1.py" />
-        <option value="$PROJECT_DIR$/sqlite_controller.py" />
         <option value="$PROJECT_DIR$/3d_model_v2(test_rotate).py" />
         <option value="$PROJECT_DIR$/tmp.py" />
         <option value="$PROJECT_DIR$/dataset.txt" />
@@ -149,25 +143,28 @@
         <option value="$PROJECT_DIR$/tests1.txt" />
         <option value="$PROJECT_DIR$/3d_model_v2.py" />
         <option value="$PROJECT_DIR$/common.py" />
-        <option value="$PROJECT_DIR$/prog_for_arduino.py" />
-        <option value="$PROJECT_DIR$/creature_end_points.py" />
         <option value="$PROJECT_DIR$/Creatures/creature_and_nnet.txt" />
-        <option value="$PROJECT_DIR$/Creatures/Hexapod1.txt" />
         <option value="$PROJECT_DIR$/Res/tmp_res.txt" />
         <option value="$PROJECT_DIR$/main_end_points_RUN.py" />
         <option value="$PROJECT_DIR$/models1/tmp2.py" />
-        <option value="$PROJECT_DIR$/main_end_points.py" />
         <option value="$PROJECT_DIR$/creature.py" />
         <option value="$PROJECT_DIR$/Creatures/Hexapod2.txt" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/prog_for_arduino.py" />
+        <option value="$PROJECT_DIR$/models_points/Hexapod_prd_20200610-06-30-46.h5" />
         <option value="$PROJECT_DIR$/tmp2.py" />
+        <option value="$PROJECT_DIR$/creature_end_points.py" />
+        <option value="$PROJECT_DIR$/Creatures/Hexapod1.txt" />
+        <option value="$PROJECT_DIR$/main_end_points.py" />
+        <option value="$PROJECT_DIR$/sqlite_controller.py" />
+        <option value="$PROJECT_DIR$/main_end_points_db.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="951" />
-    <option name="width" value="978" />
-    <option name="height" value="1039" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="-55" />
+    <option name="width" value="1485" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -175,6 +172,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -185,13 +183,12 @@
             <path>
               <item name="3D_model" type="b2602c69:ProjectViewProjectNode" />
               <item name="3D_model" type="462c0819:PsiDirectoryNode" />
-              <item name="Res_angs" type="462c0819:PsiDirectoryNode" />
+              <item name="Creatures" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -199,11 +196,11 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Елена\Desktop\Диплом_Маг\3D_model" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Елена\Desktop\Диплом_Маг\3D_model" />
       <recent name="C:\Users\Елена\Desktop\Диплом_Маг\3D_model\Creatures" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Елена\Desktop\Диплом_Маг\3D_model" />
     </key>
   </component>
@@ -219,7 +216,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.tmp2 (1)">
+  <component name="RunManager" selected="Python.main_end_points_db">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="3D_model" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -262,7 +259,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main_end_points_RUN" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="main_end_points_db" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="3D_model" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -274,7 +271,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_end_points_RUN.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_end_points_db.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sqlite_controller" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="3D_model" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sqlite_controller.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -304,34 +322,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="tmp2" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="3D_model" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models1" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\Елена\Desktop\Диплом_Маг\3D_model\tmp2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main_end_points_db" />
+        <item itemvalue="Python.sqlite_controller" />
+        <item itemvalue="Python.main_end_points" />
         <item itemvalue="Python.tmp2 (1)" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.main_end_points" />
-        <item itemvalue="Python.tmp2" />
-        <item itemvalue="Python.main_end_points_RUN" />
       </list>
     </recent_temporary>
   </component>
@@ -349,15 +346,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="762" y="0" width="781" height="830" extended-state="0" />
+    <frame x="-44" y="0" width="1188" height="832" extended-state="1" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29301074" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24500434" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.43982807" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.296034" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33142856" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.04249292" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -393,41 +391,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/prompt_toolkit/clipboard/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/mpl_toolkits/mplot3d/art3d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="151" column="33" selection-start-line="151" selection-start-column="33" selection-end-line="151" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/lines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="647" column="8" selection-start-line="647" selection-start-column="8" selection-end-line="647" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/cbook/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="215" selection-start-line="215" selection-end-line="215" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/axes/_axes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1184">
-          <caret line="789" column="8" selection-start-line="789" selection-start-column="8" selection-end-line="789" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/text.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
@@ -476,16 +439,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NeuroNet.py" />
-    <entry file="file://$PROJECT_DIR$/sqlite_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/3d_model_v1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="596">
@@ -499,13 +452,6 @@
             <element signature="e#1586#1811#0" />
             <element signature="e#2095#9903#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/tensorflow/python/framework/dtypes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="526" selection-start-line="526" selection-end-line="526" />
         </state>
       </provider>
     </entry>
@@ -627,24 +573,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/prog_for_arduino.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="60" column="7" selection-start-line="60" selection-start-column="7" selection-end-line="60" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Creatures/square_creature.txt" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/h5py/_hl/files.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="175" selection-start-line="175" selection-end-line="175" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/keras/utils/io_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -707,20 +636,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Creatures/Hexapod1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="53" column="18" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Creatures/Hexapod2.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="383">
@@ -755,37 +670,183 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/creature_end_points.py">
+    <entry file="file://$PROJECT_DIR$/Creatures/Hexapod2.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="445" lean-forward="true" selection-start-line="445" selection-end-line="445" />
+        <state relative-caret-position="306">
+          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_end_points.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/keras/utils/generic_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="145" selection-start-line="145" selection-end-line="227" selection-end-column="125" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#1848#3822#0" />
-            <element signature="e#3874#6864#0" />
-            <element signature="e#6883#7429#0" />
-            <element signature="e#7451#7679#0" />
-            <element signature="e#7702#8320#0" />
-            <element signature="e#8514#9407#0" />
-            <element signature="e#9430#9954#0" />
-            <element signature="e#9978#12420#0" />
-            <element signature="e#12660#14069#0" />
-            <element signature="e#14139#15695#0" />
-          </folding>
+        <state relative-caret-position="121">
+          <caret line="146" selection-start-line="146" selection-end-line="146" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/h5py/_hl/files.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="169" selection-start-line="169" selection-end-line="169" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/model_20200530-23-08-36.h5">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="7" column="124" selection-start-line="7" selection-start-column="122" selection-end-line="7" selection-end-column="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/keras/engine/saving.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="416" selection-start-line="416" selection-end-line="416" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/keras/optimizers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-224">
+          <caret line="163" column="31" lean-forward="true" selection-start-line="163" selection-start-column="31" selection-end-line="163" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models_points/Hexapod_prd_20200610-06-30-46.h5">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="7" column="420" selection-start-line="7" selection-start-column="418" selection-end-line="7" selection-end-column="420" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/tensorflow/python/framework/dtypes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="525" selection-start-line="525" selection-end-line="525" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tmp2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="221">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/prog_for_arduino.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="406" selection-start-line="406" selection-end-line="406" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_end_points.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1649">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding>
+            <element signature="e#1856#3830#0" />
+            <element signature="e#3882#6872#0" />
+            <element signature="e#6891#7437#0" />
+            <element signature="e#7459#7687#0" />
+            <element signature="e#7710#8328#0" />
+            <element signature="e#8358#8499#0" />
+            <element signature="e#8522#9415#0" />
+            <element signature="e#9438#9962#0" />
+            <element signature="e#9986#12498#0" />
+            <element signature="e#12568#12642#0" />
+            <element signature="e#12738#14147#0" />
+            <element signature="e#14217#15797#0" />
+            <marker date="1592654680518" expanded="true" signature="11908:12370" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ModelDB.db">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="308" selection-start-line="308" selection-end-line="308" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models1/model_20200602-02-33-34.h5">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="124" selection-start-line="7" selection-start-column="122" selection-end-line="7" selection-end-column="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Creatures/Hexapod1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-357">
+          <caret line="3" column="23" selection-start-line="3" selection-end-line="3" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/creature_end_points.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="464" column="15" lean-forward="true" selection-start-line="464" selection-start-column="15" selection-end-line="464" selection-end-column="32" />
+          <folding>
+            <element signature="e#155#14663#0" />
+            <element signature="e#3064#7191#0" />
+            <element signature="e#7579#8970#0" />
+            <element signature="e#9013#11054#0" />
+            <element signature="e#11097#12213#0" />
+            <element signature="e#12260#12685#0" />
+            <element signature="e#12770#13199#0" />
+            <element signature="e#13272#13603#0" />
+            <element signature="e#15213#16061#0" />
+            <element signature="e#16102#16346#0" />
+            <element signature="e#16394#16462#0" />
+            <element signature="e#16514#16728#0" />
+            <element signature="e#16772#17101#0" />
+            <element signature="e#17134#17158#0" />
+            <element signature="e#17199#17347#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sqlite_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="109" column="17" selection-start-line="109" selection-start-column="4" selection-end-line="109" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#109#429#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_end_points_db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4344">
+          <caret line="666" column="32" selection-start-line="666" selection-start-column="32" selection-end-line="666" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#2025#2798#0" />
+            <element signature="e#2947#3256#0" />
+            <element signature="e#3614#3999#0" />
+            <element signature="e#4021#4209#0" />
+            <element signature="e#3339#5328#0" />
+            <element signature="e#6164#9796#0" />
+            <element signature="e#8347#8893#0" />
+            <element signature="e#8915#9143#0" />
+            <element signature="e#9166#9784#0" />
+            <element signature="e#9814#9955#0" />
+            <element signature="e#9978#10871#0" />
+            <element signature="e#14024#14098#0" />
+            <element signature="e#14194#15603#0" />
+            <element signature="e#15673#17253#0" />
+          </folding>
         </state>
       </provider>
     </entry>
